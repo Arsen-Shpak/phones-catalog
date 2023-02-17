@@ -1,0 +1,577 @@
+<template>
+
+        <div class="cart__product-cart product-cart">
+        <!-- <div class="cart__product-cart product-cart" v-for="good in CardList" :key="good.itemId"> -->
+                
+                <!-- <div class={classs(
+                  'cart__product-cart',
+                  'product-cart',
+                )} key={itemId}> -->
+                  <!-- <div
+                    class={classs(
+                      'product-cart__delete',
+                      {
+                        'product-cart__delete--selected': isToDelete,
+                      },
+                    )}
+                    onClick={() => handlerDeleteFromCart(itemId)}
+                    onContextMenu={(event) => {
+                      handlerAddToDeleteList(event, itemId, isToDelete);
+                    }}
+                  /> -->
+                    <div :class="{'product-cart__delete':true}" @click="handlerDeleteFromCart(good)"></div>
+                  <!-- ЭТО ПУТЬ ДЛЯ АТРИБУТА TO В ROUTER-LINK  -->
+                    <!-- `/${good.category}/${good.itemId}` -->
+                  <router-link
+                    to="/"
+                    class='product-cart__image-box'
+                  >
+                    <img
+                      :src="require('@/images/' + good.image)"
+                      class='product-cart__image'
+                      alt="Phone"
+                    />
+                  </router-link>
+
+                  <!-- ЭТО ПУТЬ ДЛЯ АТРИБУТА TO В ROUTER-LINK  -->
+                    <!-- `/${good.category}/${good.itemId}` -->
+                  <router-link
+                    to="`/`"
+                    class='product-cart__title'
+                  >
+                    {{good.title}} {{ good.color }} 
+                  </router-link>
+
+                  <div class='product__counter counter'>
+                    <div 
+                        :class="{'counter__minus':true,
+                        'counter__minus--disable': good.count === 1
+                        }" 
+                        @click="removeCount"
+                    ></div>
+                      <div class="counter__value"> {{ good.count }} </div>
+                      <div :class="{ 'counter__plus':true,
+                        'counter__plus--disable': good.count === 5
+                        }" 
+                        @click="addCount">
+                      </div>
+                    <div class="product-cart__price">
+                      {{good.price * good.count}}$
+                    </div>
+                    <!-- </div> -->
+                  </div>
+
+        <!-- <div :class="{'cart__bill grid-mobile-1-5 grid-tablet-4-10 grid-desktop-17-25 bill':true}>
+                <div class='bill__total-price'>
+                    {{totalPrice}}
+                </div>
+                <div class='bill__items'>
+                    {`Total for ${totalItems} items`}
+                </div>
+
+                <div class='bill__line'></div>
+                <div class='bill__buttons-box'>
+                    <PrimaryButton
+                        title='Checkout'
+                        handler={handlerPrimaryButton}
+                    />
+
+                    {selectedToDelete.length > 0 && (
+                    <div
+                        class='bill__clear-button'
+                        onClick={handlerDeleteMany}
+                    >
+                        Clear
+                    </div>
+                    )}
+                </div>
+            </div>
+
+        {(!goods.length && !isLoading) && (
+          (
+            <div class='cart__empty-box grid-mobile-1-5
+            grid-tablet-1-13
+            grid-desktop-1-25'>
+              No products in the cart
+            </div>
+          )
+        )}
+      </div>
+
+      {checkout === Checkout.endCheck && (
+        <div class='grid grid-mobile grid-tablet grid-desktop'>
+          <div class="
+            cart__bill bill grid-mobile-1-5
+            grid-tablet-4-10
+            grid-desktop-8-17">
+            <div class="bill__total-price">
+              The order is successful
+            </div>
+
+            <div class='bill__items'>
+              {`Order №` + Array(4)
+                .fill(null)
+                .map(_ => String(Math.random()).slice(-4) + '-')
+                .join('')
+                .slice(0, -1)
+              }
+            </div>
+
+            <PrimaryButton
+              title='Go home'
+              handler={handlerConfirmCheck}
+            />
+          </div> -->
+              </div>
+
+</template>
+<script>
+export default {
+    props: {
+        good: {
+            type: Object,
+            default() {
+                return {}
+            }
+        }
+    },
+    methods: {
+        handlerDeleteFromCart(phone) {
+            this.$emit('deleteFromCart',phone)
+        },
+        removeCount() {
+            this.$emit('removeCount')
+        },
+        addCount() {
+            this.$emit('addCount')
+        }
+    },
+    // mounted() {
+    //     console.log(this.good);
+    // }
+}
+</script>
+<style lang="scss" scoped>
+
+@import '@/styles/mixins/mixins';
+@import '@/styles/vars/vars.scss';
+.container {
+  display: flex;
+  flex: 1;
+
+  @include desktop {
+    margin: 0 auto;
+  }
+}
+
+.cart {
+  padding: 0 16px;
+
+  &__container {
+    justify-self: center;
+
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0;
+    }
+
+    @include tablet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    @include desktop {
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    font-weight: 800;
+
+    @include mobile {
+      font-size: 32px;
+      line-height: 41px;
+    }
+
+    @include tablet {
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    @include desktop {
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    letter-spacing: -0.01em;
+
+    margin: 0 0 32px;
+
+    color: $white;
+  }
+
+  &__empty-box {
+    width: 100%;
+    color: $white;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+}
+
+.product-cart{
+  color: $white;
+
+  display: flex;
+  flex-direction: row;
+
+  gap: 24px;
+
+  justify-content: flex-start;
+  align-items: center;
+
+  @include mobile {
+    justify-content: space-between;
+
+    padding: 16px;
+
+    gap: 24px 0;
+
+    flex-wrap: wrap;
+  }
+  
+  padding: 24px;
+
+  
+  background-color: $surface-1;
+
+  margin-bottom: 16px;
+
+  &__delete {
+    cursor: pointer;
+
+    background-image: url(@/images/Cross.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 16px;
+    height: 16px;
+
+    &--selected {
+      border: 1px solid $accent;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__image-box {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    color: $white;
+
+    @include mobile {
+      width: 128px;
+    }
+
+    @include tablet {
+      width: 180px;
+    }
+
+    @include desktop {
+      width: 340px;
+    }
+
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  &__price {
+    width: 80px;
+
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 140%;
+
+    text-align: right;
+  }
+}
+
+.counter {
+  display: flex;
+  gap: 0px;
+  &__minus {
+    cursor: pointer;
+
+    background-color: transparent;
+
+    background-image: url(@/images/Minus.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-color: transparent;
+
+    border: 1px solid $surface-2;
+
+    width: 32px;
+    height: 32px;
+
+    transition: opacity .3s, background-color .3s;
+
+    &:hover {
+      background-color: $surface-2;
+    }
+
+    &--disable {
+      cursor: default;
+
+      opacity: 50%;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 32px;
+    height: 32px;
+
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    text-align: center;
+    color: $white;
+  }
+
+  &__plus {
+    cursor: pointer;
+
+    background-color: transparent;
+
+    transform: rotate(90deg);
+    background-image: url(@/images/Cross.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border: 1px solid $elements;
+
+    width: 32px;
+    height: 32px;
+
+    transition: opacity .3s, background-color .3s;
+
+    &:hover {
+      background-color: $surface-2;
+    }
+
+    &--disable {
+      cursor: default;
+
+      background-color: transparent;
+
+      opacity: 50%;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.bill {
+  width: 100%;
+  height: min-content;
+
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  color: $white;
+  
+  border: 1px solid $elements;  
+  
+  @include mobile {
+    margin-bottom: 40px;
+  }
+
+  @include tablet {
+    margin-bottom: 60px;
+  }
+
+  @include desktop {
+    margin-bottom: 80px;
+  }
+
+  &--operation {
+    position: relative;
+    border: 1px solid;
+
+    animation: bill-success 1s linear 0s infinite;
+  }
+
+  &__total-price {
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 41px;
+
+    text-align: center;
+  }
+
+  &__items {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: $secondary;
+
+    margin-bottom: 24px;
+  }
+
+  &__line {
+    width: 100%;
+    border-bottom: 1px solid $elements;
+
+    margin-bottom: 24px;
+  }
+
+  &__buttons-box {
+    width: 100%;
+    display: flex;
+
+    gap: 16px;
+  }
+
+  &__clear-button {
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 10px;
+    height: 40px;
+
+    background-color: $surface-1;
+    font-size: 14px;
+    border: 1px solid $elements;
+
+    transition: background-color .3s;
+
+    &:hover {
+      background-color: $surface-2;
+    }
+  }
+}
+
+@keyframes bill-success {
+  0%{
+    border-image: linear-gradient(
+      0deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  10%{
+    border-image: linear-gradient(
+      36deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  20%{
+    border-image: linear-gradient(
+      72deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  30%{
+    border-image: linear-gradient(
+      108deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  40%{
+    border-image: linear-gradient(
+      144deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  50%{
+    border-image: linear-gradient(
+      180deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  60%{
+    border-image: linear-gradient(
+      216deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  70%{
+    border-image: linear-gradient(
+      252deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  80%{
+    border-image: linear-gradient(
+      288deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  90%{
+    border-image: linear-gradient(
+      324deg,
+    rgba(39,174,96,1) 0%,
+    rgba(144,91,255,1) 100%) 1;
+  
+  }
+  100%{
+    border-image: linear-gradient(
+      360deg,
+    $green 0%,
+    $accent 100%) 1;
+  }
+}
+
+</style>

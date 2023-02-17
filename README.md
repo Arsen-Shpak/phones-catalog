@@ -1,4 +1,4 @@
-# phone-catalog
+# vue-market
 
 ## Project setup
 ```

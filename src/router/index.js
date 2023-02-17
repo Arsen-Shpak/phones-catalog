@@ -1,29 +1,77 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(VueRouter)
+// import { createRouter, createWebHashHistory } from "vue-router";
 
-const routes = [
+import Main from "@/pages/Main.vue";
+import Phones from "@/pages/Phones.vue";
+import NotFound from "@/pages/NotFound.vue";
+import Cart from "@/pages/Cart.vue";
+import Favourites from "@/pages/Favourites.vue";
+import Accessories from "@/pages/Accessories.vue";
+import Contributors from "@/pages/Contributors.vue";
+import ItemCard from "@/pages/ItemCard.vue";
+
+Vue.use(Router);
+let router = new Router({
+   routes: [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: Main,
+  },
+  // {
+  //   path: "/header",
+  //   name: "home",
+  //   component: Header,
+  // },
+  {
+    path: "/contributors",
+    name: "contributors",
+    component: Contributors,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: "/phones",
+    name: "phones",
+    component: Phones,
+  },
+  {
+    path: "/phones/:id",
+    name: "phonePage",
+    component: ItemCard,
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
+  },
+  {
+    path: "/favourites",
+    name: "favourites",
+    component: Favourites,
+  },
+  {
+    path: "/tablets",
+    name: "tablets",
+    component: Accessories,
+  },
+  {
+    path: "/accessories",
+    name: "accessories",
+    component: Accessories,
+  },
+  {
+    path: "/:pathMatch(.*)*", //Для обработки запросов к несуществующим ресурсам
+    name: "notFound",
+    component: NotFound,
+  },
 ]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
 })
 
-export default router
+
+// const router = createRouter({
+//   history: createWebHashHistory(),
+//   routes,
+// });
+
+export default router;
