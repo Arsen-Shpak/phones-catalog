@@ -1,15 +1,13 @@
 <template>
     <div class="card">
       <div class="card__image-container">
-          <img
-            class="card__image"
-            :src=" require('@/images/' + phone.image)"
-            alt="phone"
-            @click="$router.push({name:'phonePage',params:{id:phone.itemId}})"
-          />
+        <!-- Где есть возможность лучше использовать "router-link" для навигации (Далее переделай самостоятельно) -->
+        <router-link :to="{ name: 'phonePage', params: { id:phone.itemId } }">
+          <img class="card__image" :src="require('@/images/' + phone.image)" alt="phone"/>
+        </router-link>
       </div>
 
-        <p 
+        <p
           class="card__title"
           @click="$router.push({name:'phonePage',params:{id:phone.itemId}})"
         >
@@ -68,7 +66,7 @@
         </div> -->
       </div>
       <div class="card__buttons-container">
-        <button 
+        <button
             :class="{'card__add-button':true,
                 'card__add-button--is-selected': isInCart
             }"
@@ -91,11 +89,11 @@
             : 'Added'}
         </button> -->
 
-        <button 
+        <button
         :class="{
           'card__like-button': true,
           'card__like-button--is-selected': isInFavourites
-        }" 
+        }"
           @click="handleFavourites(phone)"></button>
         <!-- <button
           :class="{'card__like-button':true,'card__like-button--is-selected': isInFavourites }
@@ -122,6 +120,15 @@ export default {
             }
         }
   },
+
+  updated () {
+    // Проверяем, есть ли параметры маршрутизатора Vue в строке запроса URL
+    if (this.$route.params) {
+      // Используем метод "scrollTo" для перемещения пользователя в начало страницы
+      window.scrollTo(0, 0);
+    }
+  },
+
   methods: {
     ...mapMutations({
       ADD_CARDLIST: 'cart/ADD_CARDLIST',
@@ -129,7 +136,7 @@ export default {
       ADD_FAVOURITESLIST: 'favourites/ADD_FAVOURITESLIST',
       MINUS_FAVOURITESLIST: 'favourites/MINUS_FAVOURITESLIST'
     }),
-    
+
     handleShoppingCarts(phone) {
       const InCart = this.CardList.find((item) => item.itemId === phone.itemId);
       if (InCart) {
@@ -152,7 +159,7 @@ export default {
         this.ADD_FAVOURITESLIST(phone);
         // this.isInFavourites = !this.isInFavourites;
       }
-        
+
       }
   },
   computed: {
