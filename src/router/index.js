@@ -1,8 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-
-// import { createRouter, createWebHashHistory } from "vue-router";
-
 import Main from "@/pages/Main.vue";
 import Phones from "@/pages/Phones.vue";
 import NotFound from "@/pages/NotFound.vue";
@@ -20,11 +17,6 @@ let router = new Router({
     name: "home",
     component: Main,
   },
-  // {
-  //   path: "/header",
-  //   name: "home",
-  //   component: Header,
-  // },
   {
     path: "/contributors",
     name: "contributors",
@@ -67,11 +59,5 @@ let router = new Router({
   },
 ]
 })
-
-
-// const router = createRouter({
-//   history: createWebHashHistory(),
-//   routes,
-// });
 
 export default router;

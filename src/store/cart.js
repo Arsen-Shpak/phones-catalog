@@ -13,17 +13,12 @@ export const cart = {
     OrderAccepted(state) {
       return state.orderAccepted;
     },
-    // TotalPrice() {
-    //   return state.totalPrice;
-    // }
   },
   mutations: {
     ADD_CARDLIST(state, newPhone) {
       state.cartList.push(newPhone);
     },
     ADD_COUNT(state, index) {
-      // state.cartList.find((item, ind, arr) => arr.indexOf(item) === index)
-      //   .count++;
       let phone = state.cartList.find(
         (item, ind, arr) => arr.indexOf(item) === index
       );
@@ -32,8 +27,6 @@ export const cart = {
       }
     },
     REMOVE_COUNT(state, index) {
-      // state.cartList.find((item, ind, arr) => arr.indexOf(item) === index)
-      //   .count--;
       let phone = state.cartList.find(
         (item, ind, arr) => arr.indexOf(item) === index
       );
@@ -50,9 +43,6 @@ export const cart = {
       state.cartList = [];
       state.orderAccepted = true;
     },
-    // ORDER_ACCEPTED(state) {
-    //   state.orderAccepted = true;
-    // }
   },
   actions: {},
   namespaced: true,

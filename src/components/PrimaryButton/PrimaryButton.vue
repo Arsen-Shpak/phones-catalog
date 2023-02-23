@@ -1,26 +1,25 @@
 <template>
-<button
-      class='primary-button'
-      @click="handler"
-    >
+  <button
+    class='primary-button'
+    @click="handler"
+  >
     {{title}}
-    </button>
-
+  </button>
 </template>
 <script>
 export default {
-
-    props: {
-        title: {
-            type: String,
-            required:true,
-        }
-    },
-    methods: {
-        handler() {
-            this.$emit('primaryButton')
-        }
+  props: {
+    title: {
+      type: String,
+      required:true,
     }
+  },
+  
+  methods: {
+    handler() {
+      this.$emit('primaryButton')
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

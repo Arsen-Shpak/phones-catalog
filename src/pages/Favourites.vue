@@ -1,94 +1,76 @@
 <template>
      <div class="favourites">
-      <!-- <Path /> -->
-
-      <div class="
-        grid
-        grid-mobile
-        grid-tablet
-        grid-desktop"
-      >
-        <h1 class="
-          favourites__title
-          grid-mobile-1-5
-          grid-tablet-1-13
-          grid-desktop-1-25"
+        <div class="
+          grid
+          grid-mobile
+          grid-tablet
+          grid-desktop"
         >
-          Favourites
-        </h1>
+          <h1 class="
+            favourites__title
+            grid-mobile-1-5
+            grid-tablet-1-13
+            grid-desktop-1-25"
+          >
+            Favourites
+          </h1>
+          <p class="
+            favourites__product-count
+            grid-mobile-1-5
+            grid-tablet-1-7
+            grid-desktop-1-25"
+          >
+            {{ItemsInfavourites}} items
+          </p>
 
-        <!-- {isLoaded && <Loader /> } -->
-
-
-          <!-- {(!isLoaded && favouritesItems !== 0) && ( -->
-            <!-- <> -->
-              <p class="
-                favourites__product-count
+          <div 
+            v-if="ItemsInfavourites !==0" 
+            class="
+                favourites__items-wrapper
                 grid-mobile-1-5
-                grid-tablet-1-7
-                grid-desktop-1-25"
+                grid-tablet-1-13
+                grid-desktop-1-25
+            "
+          >
+            <ul class="product-items__list">
+              <li
+                class='favorites__product-item'
+                v-for="phone in FavouritesList"
+                :key="phone.itemId"
               >
-                {{ItemsInfavourites}} items
-              </p>
-
-              <div 
-                v-if="ItemsInfavourites !==0" 
-                class="
-                    favourites__items-wrapper
-                    grid-mobile-1-5
-                    grid-tablet-1-13
-                    grid-desktop-1-25
-                "
-              >
-                <!-- <ProductList goods={goods} /> -->
-                 <ul class="product-items__list">
-                    <!-- {goods.map(good => ( -->
-                        <li
-                        class='favorites__product-item'
-                        v-for="phone in FavouritesList"
-                        :key="phone.itemId"
-                        >
-                        <!-- <ProductCard
-                            good={good}
-                            path='favourites'
-                        /> -->
-                        <CardItem :phone="phone"></CardItem>
-                        </li>
-                    <!-- ))} -->
-                    </ul>
-
-              </div>
-          
+                <CardItem :phone="phone"/>
+              </li>
+            </ul>
+          </div>
+            
           <h3  
             v-if="ItemsInfavourites === 0" 
             class='favourites__empty-box
                 grid-mobile-1-5
                 grid-tablet-1-13
                 grid-desktop-1-25'
-           >
+            >
             No products in the favourites
           </h3>
+        </div>
       </div>
-    </div>
-
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 import CardItem from '@/components/CardItem/CardItem.vue';
 
 export default {
     computed: {
-        ...mapGetters({
-            ItemsInfavourites: 'favourites/ItemsInfavourites',
-            FavouritesList: 'favourites/FavouritesList'
-        }),
+      ...mapGetters({
+          ItemsInfavourites: 'favourites/ItemsInfavourites',
+          FavouritesList: 'favourites/FavouritesList'
+      }),
     },
     components: { CardItem },
-    // mounted() {
-    //     console.log(this.FavouritesList)
-    // }
 }
 </script>
+
 <style lang="scss" scoped>
 
 @import '@/styles/mixins/mixins';

@@ -1,40 +1,45 @@
 <template>
   <div>
     <div
-        v-for="([key, value]) in properties"
-        class="item-properties__line"
-        :key="key"
-      >
-        <div :class="keyClass">{{key}}</div>
-        <div :class="valueClass">{{value}}</div>
+      v-for="([key, value]) in properties"
+      class="item-properties__line"
+      :key="key"
+    >
+      <div :class="keyClass">
+        {{key}}
       </div>
-</div>
+      <div :class="valueClass">
+        {{value}}
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-    props: {
-        propertiesOfItem: {
-            type:Object
-        },
-        additionalClasses: {
-            type:Array
-        }
+  props: {
+    propertiesOfItem: {
+        type:Object
     },
-    computed: {
-        properties() {
-            return Object.entries(this.propertiesOfItem)
-        },
-        keyClass() {
-            return this.additionalClasses?.length
+    additionalClasses: {
+        type:Array
+    }
+  },
+  
+  computed: {
+    properties() {
+        return Object.entries(this.propertiesOfItem)
+    },
+    keyClass() {
+      return this.additionalClasses?.length
         ? `item-properties__name ${ this.additionalClasses[0] }`
         : 'item-properties__name';
-        },
-        valueClass() {
-            return this.additionalClasses?.length
+    },
+    valueClass() {
+      return this.additionalClasses?.length
         ? `item-properties__value ${  this.additionalClasses[1] }`
         : 'item-properties__value';
-        }
-    }   
+    }
+  }   
 }
 </script>
 <style lang="scss" scoped>

@@ -15,7 +15,10 @@
         {{filter}}
       </button>
 
-        <ul v-if='isOpen' class='filter__options-list'>
+        <ul 
+          v-if='isOpen' 
+          class='filter__options-list'
+        >
             <li 
               v-for="(option,i) in optionsList"
               :key="option"
@@ -36,24 +39,24 @@ export default {
             isOpen: false,
         }
     },
+    
     props: {
         title: {
             type: String,
-            // required:true,
         },
         optionsList: {
             type: Array,
-            // required:true,
         },
         selectedFilter:{}
     },
+    
     methods: {
         handleFilterChange(option) {
-            // console.log(option);
             this.$emit('filterChange', option);
             this.isOpen = !this.isOpen;
         }
     },
+    
     computed: {
         filter() {
             return this.optionsList.find(option => option === this.selectedFilter);

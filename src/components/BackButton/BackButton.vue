@@ -1,5 +1,8 @@
 <template>
-    <button class='back-button' @click="handleClick">
+    <button 
+      class='back-button' 
+      @click="handleClick"
+    >
       <div class='back-button__image'></div>
       <span class='back-button__title'>Back</span>
     </button>

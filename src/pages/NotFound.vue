@@ -1,13 +1,16 @@
 <template>
     <div class="something">
-        <h3 class="something__title"> Page not found</h3>
+        <h3 class="something__title"> 
+            Page not found
+        </h3>
     </div>
 </template>
+
 <script>
 export default {
-   
 }
 </script>
+
 <style scoped>
 .something {
     background-color: black;

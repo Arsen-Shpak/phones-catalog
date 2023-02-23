@@ -1,18 +1,20 @@
 <template>
     <div class="card">
       <div class="card__image-container">
-        <!-- Где есть возможность лучше использовать "router-link" для навигации (Далее переделай самостоятельно) -->
         <router-link :to="{ name: 'phonePage', params: { id:phone.itemId } }">
-          <img class="card__image" :src="require('@/images/' + phone.image)" alt="phone"/>
-        </router-link>
+          <img 
+            class="card__image" 
+            :src="require('@/images/' + phone.image)" 
+            alt="phone"
+          />
+        </router-link >
       </div>
 
-        <p
-          class="card__title"
-          @click="$router.push({name:'phonePage',params:{id:phone.itemId}})"
-        >
+      <router-link :to="{ name: 'phonePage', params: { id:phone.itemId }}">
+        <p class="card__title">
           {{phone.title}} {{ phone.color }}
         </p>
+      </router-link>
 
       <div class="card__price-container">
         <h2 class="card__current-price">
@@ -56,48 +58,27 @@
             {{phone.itemId}}
           </span>
         </div>
-        <!-- <div class="card__info-raw">
-          <span class="card__info-text">
-            Year
-          </span>
-          <span class="card__info-value">
-            {{phone.year}}
-          </span>
-        </div> -->
       </div>
       <div class="card__buttons-container">
         <button
-            :class="{'card__add-button':true,
-                'card__add-button--is-selected': isInCart
-            }"
-            @click="handleShoppingCarts(phone)"
-            >
-            <!-- @click="handleShoppingCarts(phone)" -->
-
-            {{!isInCart
-            ? 'Add to card'
-            : 'Added'  }}
-            </button>
-        <!-- <button
-          class={cn('card__add-button', {
-            'card__add-button--is-selected': isInCart
-          })}
-          onClick={handleShoppingCarts}
-        >
-          {!isInCart
-            ? 'Add to card'
-            : 'Added'}
-        </button> -->
-
+          :class="[
+            'card__add-button',
+            {'card__add-button--is-selected': isInCart}
+          ]"
+          @click="handleShoppingCarts(phone)"
+          >
+          {{!isInCart
+          ? 'Add to card'
+          : 'Added'  }}
+        </button>
         <button
-        :class="{
-          'card__like-button': true,
-          'card__like-button--is-selected': isInFavourites
-        }"
-          @click="handleFavourites(phone)"></button>
-        <!-- <button
-          :class="{'card__like-button':true,'card__like-button--is-selected': isInFavourites }
-          @click={handleFavourites}/> -->
+          :class="[
+            'card__like-button',
+            {'card__like-button--is-selected': isInFavourites}
+          ]"
+          @click="handleFavourites(phone)"
+        >
+        </button>
       </div>
     </div>
 </template>
@@ -106,28 +87,21 @@ import { mapMutations,mapGetters } from 'vuex';
 
 export default {
   name: "CardItem",
-  data() {
-    return {
-      // isInCart: false,
-      // isInFavourites:false,
-      }
-    },
-    props: {
-        phone: {
-            type: Object,
-            default() {
-                return {}
-            }
-        }
-  },
 
-  updated () {
-    // Проверяем, есть ли параметры маршрутизатора Vue в строке запроса URL
-    if (this.$route.params) {
-      // Используем метод "scrollTo" для перемещения пользователя в начало страницы
-      window.scrollTo(0, 0);
+  props: {
+    phone: {
+        type: Object,
+        default() {
+            return {}
+        }
     }
   },
+
+  // updated () {
+  //   if (this.$route.params) {
+  //     window.scrollTo(0, 0);
+  //   }
+  // },
 
   methods: {
     ...mapMutations({
@@ -141,27 +115,22 @@ export default {
       const InCart = this.CardList.find((item) => item.itemId === phone.itemId);
       if (InCart) {
         this.MINUS_CARDLIST(phone);
-        // this.isInCart = !this.isInCart;
       }
       else {
         this.ADD_CARDLIST(phone);
-        // this.isInCart = !this.isInCart;
       }
-      // this.isInCart = !this.isInCart;
     },
     handleFavourites(phone) {
       const InFavourites = this.FavouritesList.find((item) => item.itemId === phone.itemId);
       if (InFavourites) {
         this.MINUS_FAVOURITESLIST(phone);
-        // this.isInFavourites = !this.isInFavourites;
       }
       else {
         this.ADD_FAVOURITESLIST(phone);
-        // this.isInFavourites = !this.isInFavourites;
       }
-
-      }
+    }
   },
+
   computed: {
     ...mapGetters({ CardList: 'cart/CardList',FavouritesList:'favourites/FavouritesList' }),
     isInCart() {
@@ -171,9 +140,6 @@ export default {
      return this.FavouritesList.find((item)=>item.itemId === this.phone.itemId)
     }
   },
-  // mounted() {
-  //   this.$set(this.phone, 'count', 1);
-  // }
 }
 </script>
 <style lang="scss" scoped>
@@ -322,7 +288,6 @@ export default {
     &--is-selected {
       border: 1px solid $elements;
       background-color:red;
-      // background-image: url('../../images/active-like.png');
     }
     &:hover {
       background-color: $icons;

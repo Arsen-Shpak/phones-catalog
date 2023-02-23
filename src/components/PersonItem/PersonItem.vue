@@ -1,58 +1,65 @@
 <template>
-    <div class='person'>
-        <div class="person__photo-box">
-            <img :src="person.photo" alt="creator" class="person__photo" />
-        </div>
+	<div class='person'>
+		<div class="person__photo-box">
+			<img 
+				:src="person.photo" 
+				alt="creator" 
+				class="person__photo" 
+			/>
+		</div>
 
-        <div class="person__data">
-            <h2 class='person__name'>
-                {{person.name.split(' ')[0]}} <br />
-                {{person.name.split(' ')[1]}}
-            </h2>
+		<div class="person__data">
+			<h2 class='person__name'>
+				{{person.name.split(' ')[0]}} <br />
+				{{person.name.split(' ')[1]}}
+			</h2>
 
-            <div class="person__work-links">
-                <a
-                    :href="`https://${person.linkedIn}`"
-                    class="person__tag"
-                    rel="noreferrer"
-                >
-                    <img :src="Linkedin" class="person__icon" />
-                </a>
+			<div class="person__work-links">
+				<a
+					:href="`https://${person.linkedIn}`"
+					class="person__tag"
+					rel="noreferrer"
+				>
+					<img :src="Linkedin" class="person__icon" />
+				</a>
 
-                <a
-                    :href="`https://${person.git}`"
-                    class="person__tag"
-                    target='_blank'
-                    rel="noreferrer"
-                >
-                    <img :src="Github" class="person__icon" />
-                </a>
-            </div>
+				<a
+					:href="`https://${person.git}`"
+					class="person__tag"
+					target='_blank'
+					rel="noreferrer"
+				>
+					<img 
+						:src="Github" 
+						class="person__icon" 
+					/>
+				</a>
+			</div>
 
-            <div
-                class="person__email-box"
-            >
-                <!-- <img :src="faEnvelope" class="person__icon person__icon--margin-right"/> -->
-                <span class="person__text">{{person.email}}</span>
-            </div>
-        </div>
-    </div>
+			<div
+				class="person__email-box"
+			>
+				<span class="person__text">
+					{{person.email}}
+				</span>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
 import Linkedin from '@/images/Linkedin.png';
 import Github from '@/images/github.png';
 
 export default {
-    data() {
-        return {
-            Linkedin: Linkedin,
-            Github:Github
-        }
-    },
-    props: {
-        person:{type:Object}
-    },
-
+	data() {
+		return {
+			Linkedin: Linkedin,
+			Github:Github
+		}
+	},
+	props: {
+		person:{type:Object}
+	},
 }
 </script>
 <style lang="scss" scoped>

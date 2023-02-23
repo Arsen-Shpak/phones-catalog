@@ -1,45 +1,38 @@
 <template>
-    <div>
-
-   
+  <div>
     <h4 class="available-colors__title">
         Available colors
-      </h4>
-
-      <div 
-
-        class="available-colors__colors-options">
-        <!-- {colorsAvailable.map(color => {
-        const isCurrent = color === currentColor;
-
-        return ( -->
-          <div
-            v-for="color in colorsAvailable"
-            :class="[
-                'available-colors__color-box',
-                `${color}`,
-                {
-                    'available-colors__color-box--border-white': color === currentColor,
-                    'available-colors__color-box--border-gray': color !== currentColor
-                }]"
-            :key="color"
-            @click="handleColorChange(color)"
-          >
-          </div>
+    </h4>
+    <div class="available-colors__colors-options">
+      <div
+        v-for="color in colorsAvailable"
+        :class="[
+            'available-colors__color-box',
+            `${color}`,
+            // {
+            //   'available-colors__color-box--border-white': color === currentColor,
+            //   'available-colors__color-box--border-gray': color !== currentColor
+            // }
+          ]"
+        :key="color"
+        @click="handleColorChange(color)"
+      >
       </div>
-       </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-    props: {
-        colorsAvailable: {type:Array},
-        currentColor: {type:String}
-    },
-    methods: {
-        handleColorChange(newColor) {
-            this.$emit('changeColor',newColor)
-        }
+  props: {
+    colorsAvailable: {type:Array},
+    currentColor: {type:String}
+  },
+  
+  methods: {
+    handleColorChange(newColor) {
+        this.$emit('changeColor',newColor)
     }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -122,7 +115,7 @@ export default {
   background-color: white;
 }
 
-.purple {
+.violet {
   background-color: purple;
 }
 

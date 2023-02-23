@@ -7,82 +7,83 @@
 			}
 		]" 
 	>
-			<div class="burger__top">
-				<router-link
-					to="/"
-					class="burger__top-link"
-					@click="handleBurgerButton"
-				>
-					<img :src="Logo" alt="Nice gadgets" class="burger__top-img" />
-				</router-link>
-
-				<div 
-					:class="['burger__opener',
-						{
-						'burger__opener-closed': !isOpen,
-						'burger__opener-opened': isOpen
-						}
-					]"
-					@click="handleBurgerClose"
-				></div>
-			</div>
-
-			<!-- {isOpen &&  -->
-			<nav
-				v-if="isOpen"
-				class="burger__nav"
+		<div class="burger__top">
+			<router-link
+				to="/"
+				class="burger__top-link"
+				@click="handleBurgerButton"
 			>
-				<ul class="burger__nav-list">
-					<!-- {routes.map((route, i) => {
-						return ( -->
-						<li
-							v-for="(route, i) in routes"
-							class="burger__nav-item"
-							:key="route"
-							@click="handleBurgerButton"
+				<img 
+					:src="Logo" 
+					alt="Nice gadgets" 
+					class="burger__top-img" 
+				/>
+			</router-link>
 
-						>
-							<router-link
-								:to="`/${route}`"
-								:class="['burger__nav-link']"
-							>
-								{{route}}
-							</router-link>
-						</li>
-				</ul>
-			</nav>
-
-			<div v-if="isOpen" class="burger__bottom" 
-							@click="handleBurgerButton"
-
-			>
-				<router-link
-					to="/favourites"
-					class="burger__favourites"
-				>
-						<div 
-							v-if="ItemsInfavourites>0" 
-							class="burger__link-img-count"
-						>
-							{{ItemsInfavourites}}
-						</div>
-					<!-- )} -->
-				</router-link>
-
-				<router-link
-					to="/cart"
-					class="burger__cart"
-					@click="handleBurgerButton"
-				>
-						<div 
-							v-if="ItemsInCart>0" 
-							class="burger__link-img-count"
-						>
-							{{ItemsInCart}}
-						</div>
-				</router-link>
-			</div>}
+			<div 
+				:class="['burger__opener',
+					{
+					'burger__opener-closed': !isOpen,
+					'burger__opener-opened': isOpen
+					}
+				]"
+				@click="handleBurgerClose"
+			></div>
 		</div>
+
+		<nav
+			v-if="isOpen"
+			class="burger__nav"
+		>
+			<ul class="burger__nav-list">
+				<li
+					v-for="(route, i) in routes"
+					class="burger__nav-item"
+					:key="route"
+					@click="handleBurgerButton"
+
+				>
+					<router-link
+						:to="`/${route}`"
+						:class="['burger__nav-link']"
+					>
+						{{route}}
+					</router-link>
+				</li>
+			</ul>
+		</nav>
+
+		<div 
+			v-if="isOpen" 
+			class="burger__bottom" 
+			@click="handleBurgerButton"
+		>
+			<router-link
+				to="/favourites"
+				class="burger__favourites"
+			>
+				<div 
+					v-if="ItemsInfavourites>0" 
+					class="burger__link-img-count"
+				>
+					{{ItemsInfavourites}}
+				</div>
+			</router-link>
+
+			<router-link
+				to="/cart"
+				class="burger__cart"
+				@click="handleBurgerButton"
+			>
+				<div 
+					v-if="ItemsInCart>0" 
+					class="burger__link-img-count"
+				>
+					{{ItemsInCart}}
+				</div>
+			</router-link>
+		</div>
+	</div>
 </template>
 <script>
 import Logo from "@/images/Logo.png";
@@ -96,10 +97,11 @@ export default {
 			isOpen:false
 		}
 	},
+
 	computed: {
       ...mapGetters({ItemsInCart:'cart/ItemsInCart',ItemsInfavourites:'favourites/ItemsInfavourites'}),
-		
 	},
+
 	methods:{
 		handleBurgerButton(){
 			this.isOpen = false
@@ -111,7 +113,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// @import '@/style/mixins/mixins.scss';
 @import "@/styles/mixins/mixins.scss";
 @import '@/styles/vars/vars.scss';
 
@@ -216,25 +217,24 @@ export default {
 			margin: 0 auto;
 
 			&::after {
-        position: absolute;
-        content: "";
-        height: 2px;
-        width: 100%;
-        background-color: $white;
-        left: 0;
-        bottom: 0;
-        opacity: 0;
+				position: absolute;
+				content: "";
+				height: 2px;
+				width: 100%;
+				background-color: $white;
+				left: 0;
+				bottom: 0;
+				opacity: 0;
 
-        transition: opacity 0.3s;
-      }
+				transition: opacity 0.3s;
+			}
 
 			&:hover::after {
 				opacity: 1;
 			}
 
 			&--active {
-        color: $white;
-
+				color: $white;
 				&::after {
 					position: absolute;
 					content: "";
@@ -263,17 +263,17 @@ export default {
 		border-right: 1px solid $secondary;
 
 		&::after {
-      position: absolute;
-      content: "";
-      height: 16px;	
-      width: 16px;
-      background-image: url('@/images/Like.svg');
+			position: absolute;
+			content: "";
+			height: 16px;	
+			width: 16px;
+			background-image: url('@/images/Like.svg');
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-    }
+		}
 	}
 
 	&__cart {
@@ -283,17 +283,17 @@ export default {
 		height: 100%;
 
 		&::after {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      background-image: url('@/images/Cart.svg');
+			position: absolute;
+			content: "";
+			height: 16px;
+			width: 16px;
+			background-image: url('@/images/Cart.svg');
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-    }
+		}
 	}
 
 	&__link-img-count {
@@ -301,16 +301,16 @@ export default {
 		transform: translate(-50%, -50%);
 		top: calc(50% - 6px);
 		left: calc(50% + 10px);
-    height: 16px;
-    width: 16px;
-    background-color: red;
-    border-radius: 50%;
+		height: 16px;
+		width: 16px;
+		background-color: red;
+		border-radius: 50%;
 		border: 1px solid $bc-color;
-    color: $white;
-    font-weight: 600;
-    font-size: 9px;
-    line-height: 14px;
-    text-align: center;
+		color: $white;
+		font-weight: 600;
+		font-size: 9px;
+		line-height: 14px;
+		text-align: center;
 		z-index: 2;
 	}
 }

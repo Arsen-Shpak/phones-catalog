@@ -1,20 +1,23 @@
 <template>
-     <div class="accessories">
-      <h1 class="accessories__title">Section is under construction</h1>
+  <div class="accessories">
+    <h1 class="accessories__title">
+      Section is under construction
+    </h1>
 
-      <router-link
-        to='/'
-        class="accessories__button"
-      >
-        Go Home
-      </router-link>
-    </div>
+    <router-link
+      to='/'
+      class="accessories__button"
+    >
+      Go Home
+    </router-link>
+  </div>
 </template>
+
 <script>
 export default {
-    
 }
 </script>
+
 <style lang="scss" scoped>
 @import '@/styles/mixins/mixins';
 @import '@/styles/vars/vars.scss';

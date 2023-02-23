@@ -1,145 +1,145 @@
 <template>
-     <div class='item-card'>
-              <div 
-                v-if="CURRENT_PHONE"
-                class='item-card__phone-card phone-card grid grid-mobile grid-tablet grid-desktop'>
-                <!-- <div class='grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
-                  <Path />
-                </div> -->
+  <div class='item-card'>
+    <div 
+      v-if="CURRENT_PHONE"
+      class='item-card__phone-card phone-card grid grid-mobile grid-tablet grid-desktop'
+    >  
+      <h1 class='phone-card__title grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
+        {{CURRENT_PHONE.title}}
+      </h1>
 
-                <h1 class='phone-card__title grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
-                  {{CURRENT_PHONE.title}}
-                </h1>
-                 <div class="phone-card__main-image-box grid-mobile-1-5 grid-tablet-2-8 grid-desktop-3-13">
-                  <!-- <MainImage 
-                    :imageLink="CURRENT_PHONE.image"
-                    :altName="CURRENT_PHONE.title"  
-                  /> -->
+      <div class="phone-card__main-image-box grid-mobile-1-5 grid-tablet-2-8 grid-desktop-3-13">
+        <ItemMainImage 
+          :imageLink="CURRENT_PHONE.image"
+          :altName="CURRENT_PHONE.title"  
+        />
+      </div>
 
+      <div class="phone-card__other-photo-box grid-mobile-1-5 grid-tablet-1-2 grid-desktop-1-3">
+        <ItemImageBar
+          :images="avaibleImages"
+          :currentImage="CURRENT_PHONE.image"
+          @changeImage="handleImageChange"
+          :altName="CURRENT_PHONE.title"
+        />
+      </div> 
 
-                  <!-- <ItemSwiper
-                    :currentImage="CURRENT_PHONE.image"
-                    
-                  />
-                  :handleImageChange="handleImageChange"
-                    :phoneData="phoneData" -->
-                </div>
+      <div class="phone-card__short-info short-info grid-mobile-1-5 grid-tablet-8-13 grid-desktop-14-21">
+        <div class="short-info__phone-id">
+          ID: 802301
+        </div>
 
-                <div class="phone-card__other-photo-box grid-mobile-1-5 grid-tablet-1-2 grid-desktop-1-3">
-                  <ImageBar
-                    :images="CURRENT_PHONE.avaibleImages"
-                    :currentImage="CURRENT_PHONE.image"
-                    @changeImage="handleImageChange"
-                    :altName="CURRENT_PHONE.title"
-                  />
-                </div> 
+        <div class="short-info__colors available-colors">
+          <ItemAvailableColors
+            :colorsAvailable="CURRENT_PHONE.colorsAvailable"
+            :currentColor="CURRENT_PHONE.color"
+            @changeColor="handleColorChange"
+          />
+        </div>
 
-                <div class="phone-card__short-info short-info grid-mobile-1-5 grid-tablet-8-13 grid-desktop-14-21">
-                  <div class="short-info__phone-id">
-                    ID: 802301
-                  </div>
+        <div class="short-info__capacity available-capacity">
+          <ItemAvailableCapacity
+            :capacityAvailable="CURRENT_PHONE.capacityAvailable"
+            :currentCapacity="CURRENT_PHONE.capacity"
+            @changeCapacity="handleCapacityChange"
+          />
+        </div>
 
-                  <div class="short-info__colors available-colors">
-                    <AvailableColors
-                      :colorsAvailable="CURRENT_PHONE.colorsAvailable"
-                      :currentColor="CURRENT_PHONE.color"
-                      @changeColor="handleColorChange"
-                    />
-                  </div>
+        <div class="short-info__price-container item-prices">
+          <ItemPrices
+            :price="CURRENT_PHONE.price"
+            :fullPrice="CURRENT_PHONE.fullPrice"
+          />
+        </div>
 
-                  <div class="short-info__capacity available-capacity">
-                    <AvailableCapacity
-                      :capacityAvailable="CURRENT_PHONE.capacityAvailable"
-                      :currentCapacity="CURRENT_PHONE.capacity"
-                      @changeCapacity="handleCapacityChange"
-                    />
-                  </div>
+        <div class="short-info__buttons-container">
+          <button
+            :class="[
+              'short-info__add-button',
+              {'short-info__add-button--is-selected': isInCart}
+            ]"
+            
+            @click="handleShoppingCarts(CURRENT_PHONE)"
+          >
+            {{!isInCart
+              ? 'Add to cart'
+              : 'Added'}}
+          </button>
 
-                  <div class="short-info__price-container item-prices">
-                    <ItemPrices
-                      :price="CURRENT_PHONE.price"
-                      :fullPrice="CURRENT_PHONE.fullPrice"
-                    />
-                  </div>
+          <button
+            :class="['short-info__like-button',
+              {'short-info__like-button--is-selected': isInFavourites}
+            ]"
+            
+            @click="handleFavourites(CURRENT_PHONE)"
+          >
+          </button>
+        </div>
 
-                  <div class="short-info__buttons-container">
-                    <button
-                    :class="['short-info__add-button',{'short-info__add-button--is-selected': isInCart}]"
-                     
-                    @click="handleShoppingCarts(CURRENT_PHONE)"
-                    >
-                      {{!isInCart
-                        ? 'Add to cart'
-                        : 'Added'}}
-                    </button>
+        <div class="short-info__properties item-properties">
+          <ItemProperties
+            :propertiesOfItem="propertiesOfItem"
+            :additionalClasses="[]"
+          />
+        </div>
+      </div>
 
-                    <button
-                      :class="['short-info__like-button',
-                        {'short-info__like-button--is-selected': isInFavourites}
-                      ]"
-                      
-                      @click="handleFavourites(CURRENT_PHONE)"
-                    ></button>
-                  </div>
+      <div class="phone-card__about item-about grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-13">
+        <ItemAbout
+          :description="CURRENT_PHONE.description"
+        />
+      </div>
 
-                  <div class="short-info__properties item-properties">
-                    <ItemProperties
-                      :propertiesOfItem="propertiesOfItem"
-                      :additionalClasses="[]"
-                    />
-                  </div>
-                </div>
+      <div class="phone-card__technical grid-mobile-1-5 grid-tablet-1-13 grid-desktop-14-25">
+        <h4 class="phone-card__technical-title">
+          Tech specs
+        </h4>
 
-                <div class="phone-card__about item-about grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-13">
-                  <ItemAbout
-                    :description="CURRENT_PHONE.description"
-                  />
-                </div>
-
-                <div class="phone-card__technical grid-mobile-1-5 grid-tablet-1-13 grid-desktop-14-25">
-                  <h4 class="phone-card__technical-title">
-                    Tech specs
-                  </h4>
-
-                  <div class="short-info__properties item-properties">
-                    <ItemProperties
-                      :propertiesOfItem="itemTechProperties"
-                      :additionalClasses="['item-properties__name--font-size', 'item-properties__value--font-size']"
-                    />
-                  </div>
-                </div>
-            </div>
-
-            <div 
-                v-if="CURRENT_PHONE" 
-                class="item-card__carusel"
-            >
-                <SecondCarusel
-                    orderType="random"
-                    title="You may also like"
-                />
-                <!-- path='itemCard' -->
-            </div>
+        <div class="short-info__properties item-properties">
+          <ItemProperties
+            :propertiesOfItem="itemTechProperties"
+            :additionalClasses="[
+              'item-properties__name--font-size', 
+              'item-properties__value--font-size'
+            ]"
+          />
+        </div>
+      </div>
     </div>
+
+    <div 
+      v-if="CURRENT_PHONE" 
+      class="item-card__carusel"
+    >
+      <ProductsCarusel
+          orderType="random"
+          title="You may also like"
+      />
+    </div>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions,mapMutations } from 'vuex';
-import SecondCarusel from "@/components/SecondCarusel/SecondCarusel.vue";
-import AvailableCapacity from "@/components/AvailableCapacity/AvailableCapacity.vue";
+import ProductsCarusel from "@/components/ProductsCarusel/ProductsCarusel.vue";
+import ItemAvailableCapacity from "@/components/ItemAvailableCapacity/ItemAvailableCapacity.vue";
 import ItemProperties from "@/components/ItemProperties/ItemProperties.vue";
 import ItemAbout from "@/components/ItemAbout/ItemAbout.vue";
 import ItemPrices from "@/components/ItemPrices/ItemPrices.vue";
-import AvailableColors from "@/components/AvailableColors/AvailableColors.vue";
-import ImageBar from "@/components/ImageBar/ImageBar.vue";
-import ItemSwiper from "@/components/ItemSwiper/ItemSwiper.vue";
-import MainImage from '@/components/MainImage/MainImage.vue';
+import ItemAvailableColors from "@/components/ItemAvailableColors/ItemAvailableColors.vue";
+import ItemImageBar from "@/components/ItemImageBar/ItemImageBar.vue";
+import ItemMainImage from '@/components/ItemMainImage/ItemMainImage.vue';
 export default {
-    data(){
-    return {
-      
-      }
+    components:{
+      ProductsCarusel,
+      ItemAvailableCapacity,
+      ItemProperties,
+      ItemAbout,
+      ItemPrices,
+      ItemAvailableColors,
+      ItemImageBar,
+      ItemMainImage
     },
-    components:{SecondCarusel,AvailableCapacity,ItemProperties,ItemAbout,ItemPrices,AvailableColors,ImageBar,ItemSwiper,MainImage},
+    
     methods: {
       ...mapActions({ GET_CURRENT_PHONE: "phones/GET_CURRENT_PHONE" }),
       ...mapMutations({
@@ -151,41 +151,36 @@ export default {
       handleCapacityChange(newCapacity) {
         this.CURRENT_PHONE.capacity = newCapacity;
         const ind = this.CURRENT_PHONE.capacityAvailable.indexOf(newCapacity);
-        // console.log(ind)
         this.CURRENT_PHONE.price = this.CURRENT_PHONE.availablePrice[ind];
         this.CURRENT_PHONE.fullPrice = this.CURRENT_PHONE.avaibleFullPrice[ind];
       },
       handleShoppingCarts(phone) {
-      const InCart = this.CardList.find((item) => item.itemId === phone.itemId);
-      if (InCart) {
-        this.MINUS_CARDLIST(phone);
-        // this.isInCart = !this.isInCart;
-      }
-      else {
-        this.ADD_CARDLIST(phone);
-        // this.isInCart = !this.isInCart;
-      }
-      // this.isInCart = !this.isInCart;
+        const InCart = this.CardList.find((item) => item.itemId === phone.itemId);
+        if (InCart) {
+          this.MINUS_CARDLIST(phone);
+        }
+        else {
+          this.ADD_CARDLIST(phone);
+        }
       },
       handleFavourites(phone) {
         const InFavourites = this.FavouritesList.find((item) => item.itemId === phone.itemId);
         if (InFavourites) {
           this.MINUS_FAVOURITESLIST(phone);
-          // this.isInFavourites = !this.isInFavourites;
         }
         else {
           this.ADD_FAVOURITESLIST(phone);
-          // this.isInFavourites = !this.isInFavourites;
         }
-          
       },
       handleColorChange(newColor) {
-          this.CURRENT_PHONE.color = newColor
+        this.CURRENT_PHONE.color = newColor;
+        this.CURRENT_PHONE.image = this.avaibleImages[0];
       },
       handleImageChange(newImage) {
         this.CURRENT_PHONE.image = newImage
       }
     },
+    
     computed: {
       ...mapGetters({
         CURRENT_PHONE: "phones/CURRENT_PHONE",
@@ -217,18 +212,24 @@ export default {
           Zoom: this.CURRENT_PHONE.zoom ,
           Cell: this.CURRENT_PHONE.cell,
         }
+      },
+      avaibleImages() {
+        const color = this.CURRENT_PHONE.color;
+        return this.CURRENT_PHONE.avaibleImages[color];
       }
     },
+    
     mounted() {
-        this.GET_CURRENT_PHONE(this.$route.params.id)
-        console.log(this.$route.params.id)
-        
+      this.GET_CURRENT_PHONE(this.$route.params.id)
     },
     updated() {
-        // console.log(this.itemTechProperties)
+      if (this.$route.params) {
+        window.scrollTo(0, 0);
+      }
     }
 }
 </script>
+
 <style lang="scss" scoped>
 @import '@/styles/mixins/mixins.scss';
 @import '@/styles/vars/vars.scss';
@@ -270,7 +271,6 @@ export default {
       font-weight: 800;
       font-size: 22px;
       line-height: 140%;
-      // grid-row: 2/3;
       margin-bottom: 32px;
     }
 
@@ -284,7 +284,6 @@ export default {
     max-height: 288px;
 
     @include mobile {
-      // grid-row: 3/4;
       grid-row: 2/4;
       margin-bottom: 16px;
     }

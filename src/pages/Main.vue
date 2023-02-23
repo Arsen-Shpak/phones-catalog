@@ -4,24 +4,18 @@
         Welcome to Nice Gadgets store!
       </h1>
       <div class="homepage__slider grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <!-- <ProductsSlider /> -->
-        <Slider/>
+        <TheSlider/>
       </div>
 
       <div class="homepage__carusel grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <!-- <Carusel
-          orderType="year"
-          title="Brand new models"
-        /> -->
-          <!-- path='home' -->
-        <SecondCarusel 
+        <ProductsCarusel 
           orderType="year"
           title="Brand new models"
         />
       </div>
 
       <div class="homepage__categories grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <Categories
+        <ProductsCategories
           :phonesCount="PHONES.length"
           :tabletCount="0"
           :accessoriesCount="0"
@@ -29,42 +23,41 @@
       </div>
 
       <div class="homepage__carusel grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <!-- <Carusel
-          orderType="price"
-          title="Hot prices"
-        /> -->
-        <SecondCarusel 
+        <ProductsCarusel 
           orderType="price"
           title="Hot prices"
         />
-          <!-- path='home' -->
-
       </div>
     </div>
 </template>
 <script>
-// import Carusel from "@/components/Carusel/Carusel.vue";
-import Categories from "@/components/Categories/Categories.vue";
-import SecondCarusel from "@/components/SecondCarusel/SecondCarusel.vue";
-import Slider from "@/components/Slider/Slider.vue";
+import ProductsCategories from "@/components/ProductsCategories/ProductsCategories.vue";
+import ProductsCarusel from "@/components/ProductsCarusel/ProductsCarusel.vue";
+import TheSlider from "@/components/TheSlider/TheSlider.vue";
 
 import { mapGetters,mapActions } from "vuex";
 
 export default {
   components: {
-   Categories,SecondCarusel,Slider
+   ProductsCategories,
+   ProductsCarusel,
+   TheSlider
   },
+
   methods: {
     ...mapActions({GET_PHONES_FROM_API:'phones/GET_PHONES_FROM_API'})
   },
+
   computed: {
     ...mapGetters({PHONES:'phones/PHONES'})
   },
+
   mounted() {
     this.GET_PHONES_FROM_API()
   }
 }
 </script>
+
 <style lang="scss" scoped>
 @import "@/styles/vars/vars.scss";
 @import '@/styles/mixins/_mixins.scss';

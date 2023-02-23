@@ -13,16 +13,16 @@
         grid-tablet-1-13
         grid-desktop-1-25"
       >
-      <BackButton />
+        <BackButton />
 
-      <h1 class='
-        cart__title
-        grid-mobile-1-5
-        grid-tablet-1-13
-        grid-desktop-1-25'
-      >
-        Cart
-      </h1>
+        <h1 class='
+          cart__title
+          grid-mobile-1-5
+          grid-tablet-1-13
+          grid-desktop-1-25'
+        >
+          Cart
+        </h1>
       
         <div class="
           cart__container
@@ -34,86 +34,81 @@
           grid-tablet
           grid-desktop"
         >
-            <div v-if ="CardList.length > 0" class='grid-mobile-1-5 grid-tablet-2-12 grid-desktop-1-17'>
-              <ItemInCart  
-                v-for="(good,index) in CardList" 
-                :key="good.itemId" 
-                :good="good"
-                @deleteFromCart = handlerDeleteFromCart(good)
-                @removeCount = removeCount(index)
-                @addCount=addCount(index)
-              >
-              </ItemInCart>
-            </div>
+          <div 
+            v-if ="CardList.length > 0" 
+            class='grid-mobile-1-5 grid-tablet-2-12 grid-desktop-1-17'
+          >
+            <ItemInCart  
+              v-for="(good,index) in CardList" 
+              :key="good.itemId" 
+              :good="good"
+              @deleteFromCart =handlerDeleteFromCart(good)
+              @removeCount = removeCount(index)
+              @addCount=addCount(index)
+            />
+          </div>
 
-            <div  
-                v-if="CardList.length === 0 && !OrderAccepted " 
-                class='cart__empty-box grid-mobile-1-5
-                  grid-tablet-1-13
-                  grid-desktop-1-25'
+          <div  
+            v-if="CardList.length === 0 && !OrderAccepted " 
+            class='cart__empty-box grid-mobile-1-5
+              grid-tablet-1-13
+              grid-desktop-1-25'
+          >
+            No products in the cart
+          </div>
+
+          <div 
+            v-if="OrderAccepted" 
+            class='grid grid-mobile grid-tablet grid-desktop'
+          >
+            <div 
+              class="
+              cart__bill bill grid-mobile-1-5
+              grid-tablet-4-10
+              grid-desktop-8-17"
             >
-                No products in the cart
-            </div>
-
-              <div v-if="OrderAccepted" class='grid grid-mobile grid-tablet grid-desktop'>
-                <div class="
-                  cart__bill bill grid-mobile-1-5
-                  grid-tablet-4-10
-                  grid-desktop-8-17">
-                  <div class="bill__total-price">
-                    The order is successful
-                  </div>
-
-                  <div class='bill__items'>
-                    Order № {{ Math.random(100)*100}}
-                    
-                    <!-- + Array(4)
-                      .fill(null)
-                      .map(_ => String(Math.random()).slice(-4) + '-')
-                      .join('')
-                      .slice(0, -1)
-                    -->
-                  </div>
-
-                  <PrimaryButton
-                    title='Go home'
-                    @primaryButton="acceptOrder"
-                  />
-                </div>
+              <div class="bill__total-price">
+                The order is successful
               </div>
+
+              <div class='bill__items'>
+                Order № {{ Math.random(100)*100}}      
+              </div>
+
+              <PrimaryButton
+                title='Go home'
+                @primaryButton="acceptOrder"
+              />
+            </div>
+          </div>
         </div>
       
-        <div v-if ="CardList.length > 0" :class="{'cart__bill grid-mobile-1-5 grid-tablet-4-10 grid-desktop-17-25 bill':true}">
-                <div class='bill__total-price'>
-                    {{totalPrice}}$
-                </div>
-                <div class='bill__items'>
-                    Total for {{totalItems}} items
-                </div>
-
-                <div class='bill__line'></div>
-            <div class='bill__buttons-box'>
-                <PrimaryButton
-                    title='Checkout'
-                    @primaryButton="checkout"
-                  />
-
-                <!-- // {selectedToDelete.length > 0 && ( -->
-                  <!-- <div
-                      class='bill__clear-button'
-                      @click={handlerDeleteMany}
-                  >
-                      Clear
-                  </div> -->
+        <div 
+          v-if ="CardList.length > 0" 
+          :class="'cart__bill grid-mobile-1-5 grid-tablet-4-10 grid-desktop-17-25 bill'"
+        >
+            <div class='bill__total-price'>
+                {{totalPrice}}$
             </div>
-        
+            <div class='bill__items'>
+                Total for {{totalItems}} items
+            </div>
+
+            <div class='bill__line'></div>
+            <div class='bill__buttons-box'>
+              <PrimaryButton
+                  title='Checkout'
+                  @primaryButton="checkout"
+                />
+            </div>  
         </div>
-    </section>
+      </section>
     </div>
 </template>
+
 <script>
 import { mapMutations, mapGetters } from 'vuex';
-import ItemInCart from '@/components/ItemInCart/itemInCart.vue';
+import ItemInCart from '@/components/ItemInCart/ItemInCart.vue';
 import BackButton from '@/components/BackButton/BackButton.vue';
 import PrimaryButton from '@/components/PrimaryButton/PrimaryButton.vue';
 
@@ -121,13 +116,11 @@ export default {
   components: {ItemInCart,BackButton,PrimaryButton},
   
   methods: {
-    // ...mapActions('cart',['cart/MINUS_CARDLIST']),
     ...mapMutations({
       MINUS_CARDLIST: 'cart/MINUS_CARDLIST',
       ADD_COUNT: 'cart/ADD_COUNT',
       REMOVE_COUNT: 'cart/REMOVE_COUNT',
       ORDER_ACCEPT: 'cart/ORDER_ACCEPT',
-      // ORDER_ACCEPTED:'cart/ORDER_ACCEPTED',
     }),
     
     handlerDeleteFromCart(good) {
@@ -145,13 +138,6 @@ export default {
     acceptOrder() {
       this.$router.push('/')
     }
-
-    // removeCount() {
-    //   this.MINUS_CARDLIST(id)
-    // },
-    // addCount() {
-      
-    // }
   },
   computed: {
     ...mapGetters({ CardList: 'cart/CardList',OrderAccepted:'cart/OrderAccepted' }),
@@ -168,16 +154,15 @@ export default {
       },0)
     }
   },
-  mounted(){}
 }
 </script>
+
 <style lang="scss" scoped>
 
 @import '@/styles/mixins/mixins';
 @import '@/styles/vars/vars.scss';
 @import '@/styles/grid-templates/grid-templates.scss';
 .container {
-  // display: flex;
   flex: 1;
 
   @include desktop {

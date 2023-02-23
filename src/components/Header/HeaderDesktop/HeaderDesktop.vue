@@ -7,13 +7,15 @@
 						to="/"
 						class="navigation__logo-link"
 					>
-						<img :src="Logo" alt="Nice gadgets" class="navigation__logo-img" />
+						<img 
+							:src="Logo" 
+							alt="Nice gadgets" 
+							class="navigation__logo-img" 
+						/>
 					</router-link>
 
 					<nav class="navigation__pages">
 						<ul class="navigation__list">
-							<!-- {routes.map((route, i) => {
-								return ( -->
 							<li
 								v-for="(route,i) in routes"
 								class="navigation__item"
@@ -23,10 +25,6 @@
 									:to="`/${route}`"
 									:class="['navigation__link']"
 								>
-								<!-- :class="({ isActive }) => classs(
-										'navigation__link',
-										{ 'navigation__link--active': isActive },
-									)" -->
 									{{route}}
 								</router-link>
 							</li>
@@ -39,20 +37,24 @@
 						to="/favourites"
 						class="navigation__favourites"
 					>
-						<!-- {favouritesItems > 0 && ( -->
-							<div v-if="ItemsInfavourites>0" class="navigation__link-img-count">
-								{{ItemsInfavourites}}
-							</div>
-						<!-- )} -->
+						<div 
+							v-if="ItemsInfavourites>0" 
+							class="navigation__link-img-count"
+						>
+							{{ItemsInfavourites}}
+						</div>
 					</router-link>
 
 					<router-link
 						to="/cart"
 						class="navigation__cart"
 					>
-					<!-- {shoppingCartItems > 0 && ( -->
-							<div v-if="ItemsInCart>0" class="navigation__link-img-count">{{ItemsInCart}}</div>
-						<!-- )} -->
+						<div 
+							v-if="ItemsInCart>0" 
+							class="navigation__link-img-count"
+						>
+							{{ItemsInCart}}
+						</div>
 					</router-link>
 				</div>
 			</div>
@@ -70,9 +72,9 @@ export default {
 			routes:[ 'phones', 'tablets', 'accessories']
 		}
 	},
+
 	computed: {
       ...mapGetters({ItemsInCart:'cart/ItemsInCart',ItemsInfavourites:'favourites/ItemsInfavourites'}),
-		
 	}
 }
 </script>
@@ -163,11 +165,8 @@ export default {
 		width: fit-content;
 		color: $secondary;
 		margin: 0 auto;
-
 		font-weight: 800;
 		font-size: 12px;
-
-	
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 
@@ -190,7 +189,6 @@ export default {
 
 		&--active {
 			color: $white;
-
 			&::after {
 				position: absolute;
 				content: "";
@@ -223,17 +221,17 @@ export default {
 		border-left: 1px solid $secondary;
 
 		&::after {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      background-image: url(@/images/Like.svg);
+			position: absolute;
+			content: "";
+			height: 16px;
+			width: 16px;
+			background-image: url(@/images/Like.svg);
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-    }
+		}
 	}
 
 	&__cart {
@@ -244,17 +242,17 @@ export default {
 		border-left: 1px solid $secondary;
 
 		&::after {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      background-image: url('@/images/Cart.svg');
+			position: absolute;
+			content: "";
+			height: 16px;
+			width: 16px;
+			background-image: url('@/images/Cart.svg');
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-    }
+		}
 	}
 
 	&__link-img-count {
@@ -262,16 +260,16 @@ export default {
 		transform: translate(-50%, -50%);
 		top: calc(50% - 6px);
 		left: calc(50% + 10px);
-    height: 16px;
-    width: 16px;
-    background-color: red;
-    border-radius: 50%;
+		height: 16px;
+		width: 16px;
+		background-color: red;
+		border-radius: 50%;
 		border: 1px solid $bc-color;
-    color: $white;
-    font-weight: 600;
-    font-size: 9px;
-    line-height: 14px;
-    text-align: center;
+		color: $white;
+		font-weight: 600;
+		font-size: 9px;
+		line-height: 14px;
+		text-align: center;
 		z-index: 2;
 	}
 }

@@ -4,7 +4,6 @@ export const phones = {
   state: () => ({
     phones: [],
     currentPhone: {},
-    // phonesForOnePage: [],
   }),
   getters: {
     PHONES(state) {
@@ -13,19 +12,9 @@ export const phones = {
     CURRENT_PHONE(state) {
       return state.currentPhone;
     },
-    // PHONES_FOR_ONE_PAGE(state) {
-    //   // return state.phonesForOnePage;
-    //   const phonesForOnePage = state.phones.slice(
-    //     currentPage - 1 * perPages,
-    //     currentPage - 1 * perPages + perPages
-    //   );
-    //   return phonesForOnePage;
-    // },
   },
   mutations: {
     SET_PHONES_TO_STATE(state, phones) {
-      // let newListofPhones = phones.map((phone) => phone.count = 1);
-      // state.phones = newListofPhones;
       state.phones = phones;
     },
     SET_CURRENT_PHONE(state, currentPhone) {
@@ -59,32 +48,12 @@ export const phones = {
             ],
           },
         ],
-        colorsAvailable: ["black", "green", "yellow", "white", "purple", "red"],
+        colorsAvailable: ["black", "green", "yellow", "white", "violet", "red"],
       };
       state.currentPhone = phoneWithNewKeys;
     },
-    // SET_PHONES_FOR_ONE_PAGE(state, currentPage, perPages) {
-    //   const phonesForOnePage = state.phones.slice(
-    //     currentPage-1 * perPages,
-    //     currentPage-1 * perPages + perPages
-    //   );
-    //   state.phonesForOnePage = phonesForOnePage;
-    // },
   },
   actions: {
-    // GET_PHONES_FROM_API({ commit }) {
-    //   return axios("http://localhost:3000/phones", {
-    //     method: "GET",
-    //   })
-    //     .then((phones) => {
-    //       commit("SET_PHONES_TO_STATE", phones.data);
-    //       return phones;
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       return err;
-    //     });
-    // },
     async GET_PHONES_FROM_API({ commit }) {
       try {
         const response = await axios.get("http://localhost:3000/phones");

@@ -1,154 +1,74 @@
 <template>
+  <div class="cart__product-cart product-cart">
+    <div 
+      class='product-cart__delete' 
+      @click="handlerDeleteFromCart(good)">
+    </div>
+    <router-link
+      :to="{ name: 'phonePage', params: { id:good.itemId } }"
+      class='product-cart__image-box'
+    >
+      <img
+        :src="require('@/images/' + good.image)"
+        class='product-cart__image'
+        alt="Phone"
+      />
+    </router-link>
 
-        <div class="cart__product-cart product-cart">
-        <!-- <div class="cart__product-cart product-cart" v-for="good in CardList" :key="good.itemId"> -->
-                
-                <!-- <div class={classs(
-                  'cart__product-cart',
-                  'product-cart',
-                )} key={itemId}> -->
-                  <!-- <div
-                    class={classs(
-                      'product-cart__delete',
-                      {
-                        'product-cart__delete--selected': isToDelete,
-                      },
-                    )}
-                    onClick={() => handlerDeleteFromCart(itemId)}
-                    onContextMenu={(event) => {
-                      handlerAddToDeleteList(event, itemId, isToDelete);
-                    }}
-                  /> -->
-                    <div :class="{'product-cart__delete':true}" @click="handlerDeleteFromCart(good)"></div>
-                  <!-- ЭТО ПУТЬ ДЛЯ АТРИБУТА TO В ROUTER-LINK  -->
-                    <!-- `/${good.category}/${good.itemId}` -->
-                  <router-link
-                    to="/"
-                    class='product-cart__image-box'
-                  >
-                    <img
-                      :src="require('@/images/' + good.image)"
-                      class='product-cart__image'
-                      alt="Phone"
-                    />
-                  </router-link>
+    <router-link
+      :to="{ name: 'phonePage', params: { id:good.itemId } }"
+      class='product-cart__title'
+    >
+      {{good.title}} {{ good.color }} 
+    </router-link>
 
-                  <!-- ЭТО ПУТЬ ДЛЯ АТРИБУТА TO В ROUTER-LINK  -->
-                    <!-- `/${good.category}/${good.itemId}` -->
-                  <router-link
-                    to="`/`"
-                    class='product-cart__title'
-                  >
-                    {{good.title}} {{ good.color }} 
-                  </router-link>
-
-                  <div class='product__counter counter'>
-                    <div 
-                        :class="{'counter__minus':true,
-                        'counter__minus--disable': good.count === 1
-                        }" 
-                        @click="removeCount"
-                    ></div>
-                      <div class="counter__value"> {{ good.count }} </div>
-                      <div :class="{ 'counter__plus':true,
-                        'counter__plus--disable': good.count === 5
-                        }" 
-                        @click="addCount">
-                      </div>
-                    <div class="product-cart__price">
-                      {{good.price * good.count}}$
-                    </div>
-                    <!-- </div> -->
-                  </div>
-
-        <!-- <div :class="{'cart__bill grid-mobile-1-5 grid-tablet-4-10 grid-desktop-17-25 bill':true}>
-                <div class='bill__total-price'>
-                    {{totalPrice}}
-                </div>
-                <div class='bill__items'>
-                    {`Total for ${totalItems} items`}
-                </div>
-
-                <div class='bill__line'></div>
-                <div class='bill__buttons-box'>
-                    <PrimaryButton
-                        title='Checkout'
-                        handler={handlerPrimaryButton}
-                    />
-
-                    {selectedToDelete.length > 0 && (
-                    <div
-                        class='bill__clear-button'
-                        onClick={handlerDeleteMany}
-                    >
-                        Clear
-                    </div>
-                    )}
-                </div>
-            </div>
-
-        {(!goods.length && !isLoading) && (
-          (
-            <div class='cart__empty-box grid-mobile-1-5
-            grid-tablet-1-13
-            grid-desktop-1-25'>
-              No products in the cart
-            </div>
-          )
-        )}
+    <div class='product__counter counter'>
+      <div 
+          :class="[
+            'counter__minus',
+            {'counter__minus--disable': good.count === 1}
+          ]" 
+          @click="removeCount"
+      >
       </div>
-
-      {checkout === Checkout.endCheck && (
-        <div class='grid grid-mobile grid-tablet grid-desktop'>
-          <div class="
-            cart__bill bill grid-mobile-1-5
-            grid-tablet-4-10
-            grid-desktop-8-17">
-            <div class="bill__total-price">
-              The order is successful
-            </div>
-
-            <div class='bill__items'>
-              {`Order №` + Array(4)
-                .fill(null)
-                .map(_ => String(Math.random()).slice(-4) + '-')
-                .join('')
-                .slice(0, -1)
-              }
-            </div>
-
-            <PrimaryButton
-              title='Go home'
-              handler={handlerConfirmCheck}
-            />
-          </div> -->
-              </div>
+      <div class="counter__value"> 
+        {{ good.count }}
+      </div>
+      <div :class="[ 
+        'counter__plus',
+        {'counter__plus--disable': good.count === 5}
+      ]" 
+        @click="addCount">
+      </div>
+      <div class="product-cart__price">
+        {{good.price * good.count}}$
+      </div>
+    </div>
+  </div>
 
 </template>
 <script>
 export default {
-    props: {
-        good: {
-            type: Object,
-            default() {
-                return {}
-            }
-        }
+  props: {
+    good: {
+      type: Object,
+      default() {
+          return {}
+      }
+    }
+  },
+
+  methods: {
+    handlerDeleteFromCart(phone) {
+      this.$emit('deleteFromCart',phone)
     },
-    methods: {
-        handlerDeleteFromCart(phone) {
-            this.$emit('deleteFromCart',phone)
-        },
-        removeCount() {
-            this.$emit('removeCount')
-        },
-        addCount() {
-            this.$emit('addCount')
-        }
+    removeCount() {
+      this.$emit('removeCount')
     },
-    // mounted() {
-    //     console.log(this.good);
-    // }
+    addCount() {
+      this.$emit('addCount')
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>

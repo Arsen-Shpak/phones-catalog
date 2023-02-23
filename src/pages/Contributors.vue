@@ -1,7 +1,5 @@
 <template>
     <div class="contributors">
-      <!-- <Path /> -->
-
 			<div class="
         grid
         grid-mobile
@@ -22,21 +20,18 @@
           grid-tablet-1-13
           grid-desktop-1-25"
 				>
-        
-          <Person 
-              v-for="contributor in contributorsData" 
-              :person="contributor" 
-              :key="contributor.linkedIn" 
-          />
-        
+        <PersonItem 
+            v-for="contributor in contributorsData" 
+            :person="contributor" 
+            :key="contributor.linkedIn" 
+        />
 				</div>
 			</div>
 		</div>
-
 </template>
+
 <script>
-// import contributorsData from "@/Contributors/Contributors.js";
-import Person from "@/components/Person/Person.vue";
+import PersonItem from "@/components/PersonItem/PersonItem.vue";
 import Arsen from "@/images/Arsen.jpg";
 export default {
   data() {
@@ -54,9 +49,10 @@ export default {
         ]
       }
     },
-    components:{Person}
+    components:{PersonItem}
 }
 </script>
+
 <style lang="scss" scoped>
 @import '@/styles/mixins/mixins.scss';
 

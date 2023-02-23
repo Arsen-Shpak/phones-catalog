@@ -3,8 +3,6 @@
      <h4 class="item-about__title">
       About
     </h4>
-    <!-- {description.map(({title, text}) => {
-      return ( -->
         <div 
             v-for="({title, text}) in description" 
             :key="title"
@@ -15,7 +13,9 @@
               <p
                 v-for="(paragraph, i) in text"
                 :key="paragraph"
-                :class="['item-about__text',{'item-about__text--position-last': text.length - 1 === i}]"
+                :class="['item-about__text',
+                  {'item-about__text--position-last': text.length - 1 === i}
+                ]"
               >
                 {{paragraph}}
               </p>

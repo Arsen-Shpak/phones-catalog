@@ -1,59 +1,73 @@
 <template>
-     <footer class="footer">
-        <div class="footer__wrapper">
-          <div class="footer__logo">
-            <router-link to="/">
-              <img :src="Logo" alt="img" />
-            </router-link>
-          </div>
-          <nav class="footer__nav">
-            <a
-              href="/"
-              target="blanc"
-              class="footer__nav-link"
-            >
-              Github FE
-            </a>
-            <router-link to='/contributors' class="footer__nav-link">
-              Contributors
-            </router-link>
-            <a href="/" class="footer__nav-link" target="blanc">
-              Github BE
-            </a>
-          </nav>
+  <footer class="footer">
+    <div class="footer__wrapper">
+      <div class="footer__logo">
+        <router-link to="/">
+          <img 
+            :src="Logo" 
+            alt="img" 
+          />
+        </router-link>
+      </div>
+      <nav class="footer__nav">
+        <a
+          href="/"
+          target="blanc"
+          class="footer__nav-link"
+        >
+          Github FE
+        </a>
+        <router-link 
+          to='/contributors' 
+          class="footer__nav-link"
+        >
+          Contributors
+        </router-link>
+        <a 
+          href="/" 
+          class="footer__nav-link" 
+          target="blanc"
+        >
+          Github BE
+        </a>
+      </nav>
 
-          <div
-            class="footer__back"
-            @click="handleScrollToTop"
-          >
-            <p class="footer__back-article">
-              Back to top
-            </p>
-            <div
-              class="footer__back-link"
-              id="back"
-            >
-              <img class="footer__back-img" :src="vector" alt="img" />
-            </div>
-          </div>
+      <div
+        class="footer__back"
+        @click="handleScrollToTop"
+      >
+        <p class="footer__back-article">
+          Back to top
+        </p>
+        <div
+          class="footer__back-link"
+          id="back"
+        >
+          <img 
+            class="footer__back-img" 
+            :src="vector" 
+            alt="img" 
+          />
         </div>
-      </footer>
+      </div>
+    </div>
+  </footer>
 </template>
 <script>
 import Logo from "@/images/Logo.png";
 import Vector from "@/images/Vector.svg";
 export default {
-    data() {
-        return {
-            Logo: Logo,
-            vector:Vector
-        }
-    },
-    methods: {
-        handleScrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+  data() {
+    return {
+      Logo: Logo,
+      vector:Vector
     }
+  },
+  methods: {
+    handleScrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

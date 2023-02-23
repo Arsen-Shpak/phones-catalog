@@ -2,13 +2,15 @@
      <header class="header">
         <div
           v-if="!isMobile"
-          class="header__burger burger">
+          class="header__burger burger"
+        >
           <HeaderMobile />
         </div>
 
         <div
           v-if="isMobile" 
-          class="header__desktop navigation">
+          class="header__desktop navigation"
+        >
           <HeaderDesktop />
       </div>
     </header>
@@ -34,7 +36,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/vars/vars.scss";
 @import "@/styles/grid-templates/grid-templates.scss";
-// @import "../../styles/grids-templates/grid-templates.scss";
 
 .header {
   display: block;
