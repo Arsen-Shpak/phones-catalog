@@ -1,52 +1,52 @@
 <template>
-  <footer class="footer">
-    <div class="footer__wrapper">
-      <div class="footer__logo">
-        <router-link to="/">
+  <footer class='footer'>
+    <div class='footer__wrapper'>
+      <div class='footer__logo'>
+        <router-link to='/'>
           <img 
             :src="Logo" 
-            alt="img" 
+            alt='img' 
           />
         </router-link>
       </div>
-      <nav class="footer__nav">
+      <nav class='footer__nav'>
         <a
-          href="/"
-          target="blanc"
-          class="footer__nav-link"
+          href='/'
+          target='blanc'
+          class='footer__nav-link'
         >
           Github FE
         </a>
         <router-link 
           to='/contributors' 
-          class="footer__nav-link"
+          class='footer__nav-link'
         >
           Contributors
         </router-link>
         <a 
-          href="/" 
-          class="footer__nav-link" 
-          target="blanc"
+          href='/' 
+          class='footer__nav-link' 
+          target='blanc'
         >
           Github BE
         </a>
       </nav>
 
       <div
-        class="footer__back"
-        @click="handleScrollToTop"
+        class='footer__back'
+        @click='handleScrollToTop'
       >
-        <p class="footer__back-article">
+        <p class='footer__back-article'>
           Back to top
         </p>
         <div
-          class="footer__back-link"
-          id="back"
+          class='footer__back-link'
+          id='back'
         >
           <img 
-            class="footer__back-img" 
+            class='footer__back-img' 
             :src="vector" 
-            alt="img" 
+            alt='img' 
           />
         </div>
       </div>
@@ -57,15 +57,15 @@
 import Logo from "@/images/Logo.png";
 import Vector from "@/images/Vector.svg";
 export default {
-  data() {
+  data () {
     return {
       Logo: Logo,
       vector:Vector
     }
   },
   methods: {
-    handleScrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    handleScrollToTop () {
+      window.scrollTo ({ top: 0, behavior: "smooth" });
     }
   }
 }
@@ -82,7 +82,6 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     padding: 34px 16px 32px;
-
     max-width:1200px;
     width: 100%;
     margin:0 auto;
@@ -120,14 +119,11 @@ export default {
     &-link {
       display: block;
       padding: 16px 0;
-
       position: relative;
       list-style-type: none;
       text-transform: uppercase;
-
       width: fit-content;
       height: 100%;
-
       font-weight: 700;
       font-size: 12px;
       line-height: 21px;
@@ -153,7 +149,6 @@ export default {
           left: 0;
           bottom: 0;
           opacity: 0;
-
           transition: opacity 0.3s;
         }
       }
@@ -168,7 +163,6 @@ export default {
           left: 0;
           top: -32px;
           opacity: 0;
-  
           transition: opacity 0.3s;
         }
       }
@@ -213,7 +207,7 @@ export default {
     }
 
     &-article {
-      font-family: 'Mont';
+      font-family: "Mont";
       font-style: normal;
       font-weight: 700;
       font-size: 12px;

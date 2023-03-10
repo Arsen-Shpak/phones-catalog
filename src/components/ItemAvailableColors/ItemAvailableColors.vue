@@ -1,21 +1,17 @@
 <template>
   <div>
-    <h4 class="available-colors__title">
-        Available colors
+    <h4 class='available-colors__title'>
+      Available colors
     </h4>
-    <div class="available-colors__colors-options">
+    <div class='available-colors__colors-options'>
       <div
         v-for="color in colorsAvailable"
         :class="[
             'available-colors__color-box',
             `${color}`,
-            // {
-            //   'available-colors__color-box--border-white': color === currentColor,
-            //   'available-colors__color-box--border-gray': color !== currentColor
-            // }
-          ]"
+        ]"
         :key="color"
-        @click="handleColorChange(color)"
+        @click="handleColorChange (color)"
       >
       </div>
     </div>
@@ -29,14 +25,14 @@ export default {
   },
   
   methods: {
-    handleColorChange(newColor) {
-        this.$emit('changeColor',newColor)
+    handleColorChange (newColor) {
+      this.$emit ("changeColor",newColor)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '@/styles/vars/vars.scss';
+@import "@/styles/vars/vars.scss";
 
 .available-colors {
   &__title {

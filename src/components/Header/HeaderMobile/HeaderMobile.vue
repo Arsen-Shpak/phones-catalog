@@ -1,5 +1,5 @@
 <template>
-    <div
+  <div
 		:class="['burger__wrapper',
 			{
 			'burger__wrapper--opened': isOpen,
@@ -7,16 +7,16 @@
 			}
 		]" 
 	>
-		<div class="burger__top">
+		<div class='burger__top'>
 			<router-link
-				to="/"
-				class="burger__top-link"
-				@click="handleBurgerButton"
+				to='/'
+				class='burger__top-link'
+				@click='handleBurgerButton'
 			>
 				<img 
 					:src="Logo" 
-					alt="Nice gadgets" 
-					class="burger__top-img" 
+					alt='Nice gadgets' 
+					class='burger__top-img' 
 				/>
 			</router-link>
 
@@ -27,20 +27,20 @@
 					'burger__opener-opened': isOpen
 					}
 				]"
-				@click="handleBurgerClose"
+				@click='handleBurgerClose'
 			></div>
 		</div>
 
 		<nav
-			v-if="isOpen"
-			class="burger__nav"
+			v-if='isOpen'
+			class='burger__nav'
 		>
-			<ul class="burger__nav-list">
+			<ul class='burger__nav-list'>
 				<li
-					v-for="(route, i) in routes"
-					class="burger__nav-item"
+					v-for=' (route, i) in routes'
+					class='burger__nav-item'
 					:key="route"
-					@click="handleBurgerButton"
+					@click='handleBurgerButton'
 
 				>
 					<router-link
@@ -55,29 +55,29 @@
 
 		<div 
 			v-if="isOpen" 
-			class="burger__bottom" 
-			@click="handleBurgerButton"
+			class='burger__bottom' 
+			@click='handleBurgerButton'
 		>
 			<router-link
-				to="/favourites"
-				class="burger__favourites"
+				to='/favourites'
+				class='burger__favourites'
 			>
 				<div 
 					v-if="ItemsInfavourites>0" 
-					class="burger__link-img-count"
+					class='burger__link-img-count'
 				>
 					{{ItemsInfavourites}}
 				</div>
 			</router-link>
 
 			<router-link
-				to="/cart"
-				class="burger__cart"
-				@click="handleBurgerButton"
+				to='/cart'
+				class='burger__cart'
+				@click='handleBurgerButton'
 			>
 				<div 
 					v-if="ItemsInCart>0" 
-					class="burger__link-img-count"
+					class='burger__link-img-count'
 				>
 					{{ItemsInCart}}
 				</div>
@@ -87,26 +87,26 @@
 </template>
 <script>
 import Logo from "@/images/Logo.png";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-	data(){
+	data (){
 		return {
 			Logo:Logo,
-			routes:['phones', 'tablets', 'accessories'],
+			routes:["phones", "tablets", "accessories"],
 			isOpen:false
 		}
 	},
 
 	computed: {
-      ...mapGetters({ItemsInCart:'cart/ItemsInCart',ItemsInfavourites:'favourites/ItemsInfavourites'}),
+    ...mapGetters ({ItemsInCart:"cart/ItemsInCart",ItemsInfavourites:"favourites/ItemsInfavourites"}),
 	},
 
 	methods:{
-		handleBurgerButton(){
+		handleBurgerButton (){
 			this.isOpen = false
 		},
-		handleBurgerClose(){
+		handleBurgerClose (){
 			this.isOpen = !this.isOpen
 		}
 	}
@@ -114,7 +114,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/styles/mixins/mixins.scss";
-@import '@/styles/vars/vars.scss';
+@import "@/styles/vars/vars.scss";
 
 .burger {
 	&__wrapper {
@@ -166,7 +166,7 @@ export default {
 				content: "";
 				height: 16px;
 				width: 16px;
-				background-image: url('@/images/Burger.svg');
+				background-image: url("@/images/Burger.svg");
 				background-position: center;
 				background-repeat: no-repeat;
 				top: 50%;
@@ -175,30 +175,28 @@ export default {
 			}
 		}
 			
-			&-opened {
-				&::after {
-					position: absolute;
-					content: "";
-					height: 16px;
-					width: 16px;
-					background-image: url('@/images/Cross.svg');
-					background-position: center;
-					background-repeat: no-repeat;
-					top: 50%;
-					left: 50%;
-					transform: translate(-50%, -50%);
-				}
+		&-opened {
+			&::after {
+				position: absolute;
+				content: "";
+				height: 16px;
+				width: 16px;
+				background-image: url("@/images/Cross.svg");
+				background-position: center;
+				background-repeat: no-repeat;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
 			}
+		}
 	}
 
 	&__nav {
 		flex: 1;
-
 		&-list {
 			font-weight: 800;
 			font-size: 12px;
 			line-height: 11px;
-	
 			letter-spacing: 0.04em;
 			text-transform: uppercase;
 		}
@@ -225,7 +223,6 @@ export default {
 				left: 0;
 				bottom: 0;
 				opacity: 0;
-
 				transition: opacity 0.3s;
 			}
 
@@ -267,7 +264,7 @@ export default {
 			content: "";
 			height: 16px;	
 			width: 16px;
-			background-image: url('@/images/Like.svg');
+			background-image: url("@/images/Like.svg");
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;
@@ -287,7 +284,7 @@ export default {
 			content: "";
 			height: 16px;
 			width: 16px;
-			background-image: url('@/images/Cart.svg');
+			background-image: url("@/images/Cart.svg");
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;

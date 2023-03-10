@@ -1,5 +1,5 @@
 <template>
-  <div class="phones">
+  <div class='phones'>
     <section class='phones-page__products products grid grid-mobile grid-tablet grid-desktop'>
       <h1 class='products__title grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-10'>
         Mobile phones
@@ -11,35 +11,35 @@
         v-if="PHONES.length!==0" 
         class='products__filters grid-mobile-1-4 grid-tablet-1-6 grid-desktop-1-8'
       >
-        <div class="products__filter products__filter--left"> 
+        <div class='products__filter products__filter--left'> 
           <FilterBy 
             :optionsList="sortByOptions"
-            title="Sort by"
+            title='Sort by'
             :selectedFilter="sortBy"
             @filterChange="changeSort"
           />
         </div>
-        <div class="products__filter products__filter--right"> 
+        <div class='products__filter products__filter--right'> 
           <FilterBy 
             :optionsList="perPageOptions"
-            title="Items per page"
+            title='Items per page'
             :selectedFilter="perPages"
             @filterChange="filterChange"  
           />
         </div>
         
       </div>    
-      <div class="
+      <div class='
         products__cards-wrapper
         grid-mobile-1-5
         grid-tablet-1-13
-        grid-desktop-1-25"
+        grid-desktop-1-25'
       >
-        <div class="products__container">
+        <div class='products__container'>
           <div   
             v-for="phone in phonesForOnePage" 
             :phone="phone" 
-            class="products__product-container"
+            class='products__product-container'
             :key="phone.itemId"
           >
             <CardItem
@@ -73,37 +73,37 @@ import FilterBy from "@/components/FilterBy/FilterBy.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      sortByOptions:['Newest','Oldest','Price Up','Price Down'],
-      perPageOptions: [16, 12, 8, 4],
-      perPages:16,
-      sortBy:'Newest',
-      currentPage: 1,
-    }
-  },
-  
   components: {
     CardItem,
     BackButton,
     PaginationOfPage,
     FilterBy
   },
-  
+
+  data () {
+    return {
+      sortByOptions:["Newest","Oldest","Price Up","Price Down"],
+      perPageOptions: [16, 12, 8, 4],
+      perPages:16,
+      sortBy:"Newest",
+      currentPage: 1,
+    }
+  },
+   
   computed: {
-    ...mapGetters({ PHONES: 'phones/PHONES' }),
-    phonesForOnePage() {
-      return [...this.PHONES].sort((goodA, goodB) => {
-        switch (this.sortBy) {
+    ...mapGetters ({ PHONES: "phones/PHONES" }),
+    phonesForOnePage () {
+      return [...this.PHONES].sort ( (goodA, goodB) => {
+        switch  (this.sortBy) {
           case "Newest": {
-            if (goodA.year && goodB.year) {
+            if  (goodA.year && goodB.year) {
               return goodA.year - goodB.year;
             }
             return 0;
           }
 
           case "Oldest": {
-            if (goodA.year && goodB.year) {
+            if  (goodA.year && goodB.year) {
               return goodB.year - goodA.year;
             }
             return 0;
@@ -112,42 +112,42 @@ export default {
           case "Price Up":
             return goodA.price - goodB.price;
 
-          case 'Price Down':
+          case "Price Down":
             return goodB.price - goodA.price;
 
           default:
             return 0;
         }
-      }).slice(
-        (this.currentPage - 1) * this.perPages,
+      }).slice (
+         (this.currentPage - 1) * this.perPages,
         this.currentPage * this.perPages
       );
     },
   },
 
+  mounted () {
+    this.GET_PHONES_FROM_API ();
+  },
+
   methods: {
-    ...mapActions({ GET_PHONES_FROM_API: 'phones/GET_PHONES_FROM_API' }),
-    filterChange(option) {
+    ...mapActions ({ GET_PHONES_FROM_API: "phones/GET_PHONES_FROM_API" }),
+    filterChange (option) {
       this.perPages = option;
     },
-    changeSort(option) {
+    changeSort (option) {
       this.sortBy = option;
     },
-    pageChange(newPage) {
+    pageChange (newPage) {
       this.currentPage = newPage;
     },
   },
-
-  mounted() {
-      this.GET_PHONES_FROM_API();
-  }
 }
 </script>
 
 <style scoped lang="scss">
 
-@import '@/styles/vars/vars.scss';
-@import '@/styles/mixins/mixins';
+@import "@/styles/vars/vars.scss";
+@import "@/styles/mixins/mixins";
 
 .phones {
   flex: 1;

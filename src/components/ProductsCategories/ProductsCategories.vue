@@ -1,70 +1,70 @@
 <template>
-  <section class="categories">
-    <h2 class="categories__title">
+  <section class='categories'>
+    <h2 class='categories__title'>
       Shop by category
     </h2>
 
-    <ul class="categories__list">
-      <li class="categories__item">
+    <ul class='categories__list'>
+      <li class='categories__item'>
         <router-link 
-          class="categories__link" 
-          to="/phones"
+          class='categories__link' 
+          to='/phones'
         >
-          <div class="categories__link-container">
+          <div class='categories__link-container'>
             <img
               :src="PhonesPng"
-              alt="phones"
-              class="categories__img"
+              alt='phones'
+              class='categories__img'
             />
           </div>
-          <h4 class="categories__subtitle">
+          <h4 class='categories__subtitle'>
             Mobile phones
           </h4>
         </router-link>
-        <span class="categories__info">
+        <span class='categories__info'>
           {{phonesCount}} models
         </span>
       </li>
 
-      <li class="categories__item">
+      <li class='categories__item'>
         <router-link 
-          class="categories__link" 
-          to="/tablets"
+          class='categories__link' 
+          to='/tablets'
         >
-          <div class="categories__link-container">
+          <div class='categories__link-container'>
             <img
               :src="TabletsPng"
-              alt="tablets"
-              class="categories__img"
+              alt='tablets'
+              class='categories__img'
             />
           </div>
-          <h4 class="categories__subtitle">
+          <h4 class='categories__subtitle'>
             Tablets
           </h4>
         </router-link>
-        <span class="categories__info">
+        <span class='categories__info'>
           {{tabletCount}} models
         </span>
       </li>
 
-      <li class="categories__item">
+      <li class='categories__item'>
         <router-link 
-          class="categories__link" 
-          to="/accessory"
+          class='categories__link' 
+          to='/accessory'
         >
-          <div class="categories__link-container">
+          <div class='categories__link-container'>
             <img
               :src="AccessoriesPng"
-              alt="category"
-              class="categories__img"
+              alt='category'
+              class='categories__img'
             />
           </div>
 
-          <h4 class="categories__subtitle">
+          <h4 class='categories__subtitle'>
             Accessories
           </h4>
         </router-link>
-        <span class="categories__info">
+        <span class='categories__info'>
           {{accessoriesCount}} models
         </span>
       </li>
@@ -78,25 +78,25 @@ import TabletsPng from "@/images/TabletsPng.png";
 import AccessoriesPng from "@/images/AccessoriesPng.png";
 
 export default {
-  data() {
+  props: {
+    phonesCount: { type: Number },
+    tabletCount: { type: Number },
+    accessoriesCount: { type: Number },
+  },
+
+  data () {
     return {
       PhonesPng:PhonesPng,
       TabletsPng: TabletsPng,
       AccessoriesPng:AccessoriesPng,
     }
   },
-
-  props: {
-    phonesCount: { type: Number },
-    tabletCount: { type: Number },
-    accessoriesCount: { type: Number },
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/vars/vars.scss";
-@import '@/styles/mixins/mixins';
+@import "@/styles/mixins/mixins";
 
 .categories {
   &__title {

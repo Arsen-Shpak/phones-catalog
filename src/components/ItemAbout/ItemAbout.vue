@@ -1,40 +1,40 @@
 <template>
   <div>
-     <h4 class="item-about__title">
+    <h4 class='item-about__title'>
       About
     </h4>
-        <div 
-            v-for="({title, text}) in description" 
-            :key="title"
+    <div 
+      v-for="({title, text}) in description" 
+      :key="title"
+    >
+      <h5 class='item-about__subtitle'>
+        {{title}}
+      </h5>
+        <p
+          v-for="(paragraph, i) in text"
+          :key="paragraph"
+          :class="['item-about__text',
+            {'item-about__text--position-last': text.length - 1 === i}
+          ]"
         >
-          <h5 class="item-about__subtitle">
-            {{title}}
-          </h5>
-              <p
-                v-for="(paragraph, i) in text"
-                :key="paragraph"
-                :class="['item-about__text',
-                  {'item-about__text--position-last': text.length - 1 === i}
-                ]"
-              >
-                {{paragraph}}
-              </p>
-        </div>
+          {{paragraph}}
+        </p>
+    </div>
   </div>
 </template>
 <script>
 export default {
-    props: {
-        description: {
-            type:Array
-        }
+  props: {
+    description: {
+      type:Array
     }
+  }
 }
 </script>
 <style lang="scss" scoped>
 
-@import '@/styles/mixins/mixins.scss';
-@import '@/styles/vars/vars.scss';
+@import "@/styles/mixins/mixins.scss";
+@import "@/styles/vars/vars.scss";
 
 .item-about {
   &__title {

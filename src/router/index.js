@@ -10,7 +10,7 @@ import Contributors from "@/pages/Contributors.vue";
 import ItemCard from "@/pages/ItemCard.vue";
 
 Vue.use(Router);
-let router = new Router({
+const router = new Router({
    routes: [
   {
     path: "/",

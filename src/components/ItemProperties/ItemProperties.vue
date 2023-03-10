@@ -2,7 +2,7 @@
   <div>
     <div
       v-for="([key, value]) in properties"
-      class="item-properties__line"
+      class='item-properties__line'
       :key="key"
     >
       <div :class="keyClass">
@@ -18,34 +18,34 @@
 export default {
   props: {
     propertiesOfItem: {
-        type:Object
+      type:Object
     },
     additionalClasses: {
-        type:Array
+      type:Array
     }
   },
   
   computed: {
-    properties() {
-        return Object.entries(this.propertiesOfItem)
+    properties () {
+      return Object.entries (this.propertiesOfItem)
     },
-    keyClass() {
+    keyClass () {
       return this.additionalClasses?.length
-        ? `item-properties__name ${ this.additionalClasses[0] }`
-        : 'item-properties__name';
+      ? `item-properties__name ${ this.additionalClasses[0] }`
+      : "item-properties__name";
     },
-    valueClass() {
+    valueClass () {
       return this.additionalClasses?.length
-        ? `item-properties__value ${  this.additionalClasses[1] }`
-        : 'item-properties__value';
+      ? `item-properties__value ${  this.additionalClasses[1] }`
+      : "item-properties__value";
     }
   }   
 }
 </script>
 <style lang="scss" scoped>
 
-@import '@/styles/mixins/mixins.scss';
-@import '@/styles/vars/vars.scss';
+@import "@/styles/mixins/mixins.scss";
+@import "@/styles/vars/vars.scss";
 
 .item-properties {
   &__line{

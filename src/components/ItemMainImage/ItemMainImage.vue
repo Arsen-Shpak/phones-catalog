@@ -1,11 +1,11 @@
 <template>
   <div
-    class="phone-card__main-image-box"
+    class='phone-card__main-image-box'
   >
     <img
-      :src="require('@/images/' + imageLink)"
+      :src="require ('@/images/' + imageLink)"
       :alt="altName"
-      class="phone-card__main-image"
+      class='phone-card__main-image'
     />
   </div>
 </template>

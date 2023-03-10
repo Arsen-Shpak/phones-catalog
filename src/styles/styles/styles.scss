@@ -1,11 +1,11 @@
-@import '@/styles/vars/vars.scss';
+@import "@/styles/vars/vars.scss";
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Mont';
+  font-family: "Mont";
   margin: 0;
   background-color: $bc-color;
 }
@@ -39,4 +39,4 @@ a {
   text-decoration: none;
 }
 
-@import '@/styles/grid-templates/grid-templates.scss';
+@import "@/styles/grid-templates/grid-templates.scss";

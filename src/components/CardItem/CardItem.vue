@@ -1,163 +1,158 @@
 <template>
-    <div class="card">
-      <div class="card__image-container">
-        <router-link :to="{ name: 'phonePage', params: { id:phone.itemId } }">
-          <img 
-            class="card__image" 
-            :src="require('@/images/' + phone.image)" 
-            alt="phone"
-          />
-        </router-link >
-      </div>
+  <div class='card'>
+    <div class='card__image-container'>
+      <router-link :to="{ name: 'phonePage', params: { id:phone.itemId } }">
+        <img 
+          class='card__image' 
+          :src="require ('@/images/' + phone.image)"
+          alt='phone'
+        />
+      </router-link >
+    </div>
 
-      <router-link :to="{ name: 'phonePage', params: { id:phone.itemId }}">
-        <p class="card__title">
-          {{phone.title}} {{ phone.color }}
-        </p>
-      </router-link>
+    <router-link :to="{ name: 'phonePage', params: { id:phone.i }}">
+      <p class='card__title'>
+        {{phone.title}} {{ phone.color }}
+      </p>
+    </router-link>
 
-      <div class="card__price-container">
-        <h2 class="card__current-price">
-          ${{phone.price}}
-        </h2>
-        <h2 class="card__full-price">
-          ${{phone.fullPrice}}
-        </h2>
+    <div class='card__price-container'>
+      <h2 class='card__current-price'>
+        ${{phone.price}}
+      </h2>
+      <h2 class='card__full-price'>
+        ${{phone.fullPrice}}
+      </h2>
+    </div>
+    <hr class='card__line'/>
+    <div class='card__info-container'>
+      <div class='card__info-raw'>
+        <span class='card__info-text'>
+          Screen
+        </span>
+        <span class='card__info-value'>
+          {{phone.screen}}
+        </span>
       </div>
-      <hr class="card__line"/>
-      <div class="card__info-container">
-        <div class="card__info-raw">
-          <span class="card__info-text">
-            Screen
-          </span>
-          <span class="card__info-value">
-            {{phone.screen}}
-          </span>
-        </div>
-        <div class="card__info-raw">
-          <span class="card__info-text">
-            Capacity
-          </span>
-          <span class="card__info-value">
-            {{ phone.capacity}}
-          </span>
-        </div>
-        <div class="card__info-raw">
-          <span class="card__info-text">
-            RAM
-          </span>
-          <span class="card__info-value">
-            {{phone.RAM}}
-          </span>
-        </div>
-        <div class="card__info-raw">
-          <span class="card__info-text">
-            ItemId
-          </span>
-          <span class="card__info-value">
-            {{phone.itemId}}
-          </span>
-        </div>
+      <div class='card__info-raw'>
+        <span class='card__info-text'>
+          Capacity
+        </span>
+        <span class='card__info-value'>
+          {{ phone.capacity}}
+        </span>
       </div>
-      <div class="card__buttons-container">
-        <button
-          :class="[
-            'card__add-button',
-            {'card__add-button--is-selected': isInCart}
-          ]"
-          @click="handleShoppingCarts(phone)"
-          >
-          {{!isInCart
-          ? 'Add to card'
-          : 'Added'  }}
-        </button>
-        <button
-          :class="[
-            'card__like-button',
-            {'card__like-button--is-selected': isInFavourites}
-          ]"
-          @click="handleFavourites(phone)"
-        >
-        </button>
+      <div class='card__info-raw'>
+        <span class='card__info-text'>
+          RAM
+        </span>
+        <span class='card__info-value'>
+          {{phone.RAM}}
+        </span>
+      </div>
+      <div class='card__info-raw'>
+        <span class='card__info-text'>
+          ItemId
+        </span>
+        <span class='card__info-value'>
+          {{phone.itemId}}
+        </span>
       </div>
     </div>
+    <div class='card__buttons-container'>
+      <button
+        :class="[
+          'card__add-button',
+          {'card__add-button--is-selected': isInCart}
+        ]"
+        @click="handleShoppingCarts (phone)"
+      >
+        {{!isInCart
+        ? 'Add to card'
+        : 'Added'  }}
+      </button>
+      <button
+        :class="[
+          'card__like-button',
+          {'card__like-button--is-selected': isInFavourites}
+        ]"
+        @click="handleFavourites (phone)"
+      >
+      </button>
+    </div>
+  </div>
 </template>
 <script>
 import { mapMutations,mapGetters } from 'vuex';
 
 export default {
-  name: "CardItem",
+  name: 'CardItem',
 
   props: {
     phone: {
-        type: Object,
-        default() {
-            return {}
-        }
+      type: Object,
+      default  () {
+        return {}
+      }
     }
   },
 
-  // updated () {
-  //   if (this.$route.params) {
-  //     window.scrollTo(0, 0);
-  //   }
-  // },
+ computed: {
+    ...mapGetters ({ CardList: "cart/CardList",FavouritesList:"favourites/FavouritesList" }),
+    isInCart () {
+      return this.CardList.find ((item)=>item.itemId === this.phone.itemId)
+    },
+    isInFavourites  () {
+      return this.FavouritesList.find ((item)=>item.itemId === this.phone.itemId)
+    }
+  },
 
   methods: {
-    ...mapMutations({
-      ADD_CARDLIST: 'cart/ADD_CARDLIST',
-      MINUS_CARDLIST: 'cart/MINUS_CARDLIST',
-      ADD_FAVOURITESLIST: 'favourites/ADD_FAVOURITESLIST',
-      MINUS_FAVOURITESLIST: 'favourites/MINUS_FAVOURITESLIST'
+    ...mapMutations ({
+      ADD_CARDLIST: "cart/ADD_CARDLIST",
+      MINUS_CARDLIST: "cart/MINUS_CARDLIST",
+      ADD_FAVOURITESLIST: "favourites/ADD_FAVOURITESLIST",
+      MINUS_FAVOURITESLIST: "favourites/MINUS_FAVOURITESLIST"
     }),
 
-    handleShoppingCarts(phone) {
-      const InCart = this.CardList.find((item) => item.itemId === phone.itemId);
-      if (InCart) {
-        this.MINUS_CARDLIST(phone);
+    handleShoppingCarts (phone) {
+      const InCart = this.CardList.find ((item) => item.itemId === phone.itemId);
+      if  (InCart) {
+        this.MINUS_CARDLIST (phone);
       }
       else {
-        this.ADD_CARDLIST(phone);
+        this.ADD_CARDLIST  (phone);
       }
     },
-    handleFavourites(phone) {
-      const InFavourites = this.FavouritesList.find((item) => item.itemId === phone.itemId);
-      if (InFavourites) {
-        this.MINUS_FAVOURITESLIST(phone);
+    handleFavourites (phone) {
+      const InFavourites = this.FavouritesList.find ( (item) => item.itemId === phone.itemId);
+      if  (InFavourites) {
+        this.MINUS_FAVOURITESLIST (phone);
       }
       else {
-        this.ADD_FAVOURITESLIST(phone);
+        this.ADD_FAVOURITESLIST (phone);
       }
     }
   },
 
-  computed: {
-    ...mapGetters({ CardList: 'cart/CardList',FavouritesList:'favourites/FavouritesList' }),
-    isInCart() {
-     return this.CardList.find((item)=>item.itemId === this.phone.itemId)
-    },
-    isInFavourites() {
-     return this.FavouritesList.find((item)=>item.itemId === this.phone.itemId)
-    }
-  },
+ 
 }
 </script>
 <style lang="scss" scoped>
 
-@import '@/styles/vars/vars.scss';
-@import '@/styles/mixins/mixins';
+@import "@/styles/vars/vars.scss";
+@import"@/styles/mixins/mixins";
 
 .main__title{
-    color:black;
-    font-size:20px;
+  color:black;
+  font-size:20px;
 }
-
 .card {
   flex-grow: 0;
   flex-shrink: 0;
   transition: outline 0.3s ease-out,
-    box-shadow 0.3s ease-out,
-    transform 0.3s ease-out;
+  box-shadow 0.3s ease-out,
+  transform 0.3s ease-out;
   &:hover {
     outline: 1px solid #a378ff;
     box-shadow: rgba(144,91,255,1) 0px 1px 22px -8px inset;

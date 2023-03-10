@@ -1,41 +1,41 @@
 <template>
   <div>
-    <h4 class="available-capacity__title">
-        Select capacity
-      </h4>
+    <h4 class='available-capacity__title'>
+      Select capacity
+    </h4>
 
-      <div class="available-capacity__options">
-          <div
-            v-for="capacity in capacityAvailable"
-            :class="{
-              'available-capacity__box--current': capacity === currentCapacity,
-              'available-capacity__box--option': capacity !== currentCapacity
-            }"
-            :key="capacity"
-            @click="handleCapacityChange(capacity)"
-          >
-            {{capacity}}
-          </div>
+    <div class='available-capacity__options'>
+      <div
+        v-for="capacity in capacityAvailable"
+        :class="{
+          'available-capacity__box--current': capacity === currentCapacity,
+          'available-capacity__box--option': capacity !== currentCapacity
+        }"
+        :key="capacity"
+        @click="handleCapacityChange (capacity)"
+      >
+        {{capacity}}
       </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
-  emits: ["changeCapacity"],
-  
   props: {
-      capacityAvailable: {
-        type:Array
-      },
-      currentCapacity: {
-        type:String
-      }
+    capacityAvailable: {
+      type:Array
+    },
+    currentCapacity: {
+      type:String
+    }
   },
-  
+
+  emits: ["changeCapacity"],
+   
   methods: {
-      handleCapacityChange(newCapacity) {
-        this.$emit('changeCapacity',newCapacity)
-      }
+    handleCapacityChange (newCapacity) {
+      this.$emit ("changeCapacity",newCapacity)
+    }
   }
 }
 </script>

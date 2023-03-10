@@ -1,22 +1,18 @@
 <template>  
   <div>
     <div
-      v-for="(imageLink, i) in images"
+      v-for=" (imageLink, i) in images"
       :key="i"
       :class="[
         'single-photo-box',
-        // {
-        //     'single-photo-box--border-white':i === currentImage,
-        //     'single-photo-box--border-grey':i !== currentImage,
-        // }
       ]"
       
-      @click="handleImageChange(imageLink)"
+      @click="handleImageChange (imageLink)"
     >
       <img
-        :src="require('@/images/' + imageLink)"
+        :src="require ('@/images/' + imageLink)"
         :alt="altName"
-        class="single-photo-box__preview-image"
+        class='single-photo-box__preview-image'
       />
     </div>
   </div>
@@ -30,15 +26,15 @@ export default {
   },
   
   methods: {
-    handleImageChange(number) {
-        this.$emit("changeImage",number)
+    handleImageChange (number) {
+      this.$emit ("changeImage",number)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '@/styles/mixins/mixins.scss';
-@import '@/styles/vars/vars.scss';
+@import "@/styles/mixins/mixins.scss";
+@import "@/styles/vars/vars.scss";
 
 .single-photo-box {
   width: 50px;
@@ -51,13 +47,13 @@ export default {
     height: 80px;
   }
 
-  &--border-white{
-    border: 1px solid $white;
-  }
+  // &--border-white{
+  //   border: 1px solid $white;
+  // }
 
-  &--border-grey{
-    border: 1px solid $secondary;
-  }
+  // &--border-grey{
+  //   border: 1px solid $secondary;
+  // }
 
   &__preview-image {
     width: 100%;

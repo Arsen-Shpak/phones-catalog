@@ -1,45 +1,45 @@
 <template>
 	<div class='person'>
-		<div class="person__photo-box">
+		<div class='person__photo-box'>
 			<img 
 				:src="person.photo" 
-				alt="creator" 
-				class="person__photo" 
+				alt='creator' 
+				class='person__photo' 
 			/>
 		</div>
 
-		<div class="person__data">
+		<div class='person__data'>
 			<h2 class='person__name'>
-				{{person.name.split(' ')[0]}} <br />
-				{{person.name.split(' ')[1]}}
+				{{person.name.split (" ")[0]}} <br />
+				{{person.name.split (" ")[1]}}
 			</h2>
 
-			<div class="person__work-links">
+			<div class='person__work-links'>
 				<a
 					:href="`https://${person.linkedIn}`"
-					class="person__tag"
-					rel="noreferrer"
+					class='person__tag'
+					rel='noreferrer'
 				>
-					<img :src="Linkedin" class="person__icon" />
+					<img :src="Linkedin" class='person__icon' />
 				</a>
 
 				<a
 					:href="`https://${person.git}`"
-					class="person__tag"
+					class='person__tag'
 					target='_blank'
-					rel="noreferrer"
+					rel='noreferrer'
 				>
 					<img 
 						:src="Github" 
-						class="person__icon" 
+						class='person__icon' 
 					/>
 				</a>
 			</div>
 
 			<div
-				class="person__email-box"
+				class='person__email-box'
 			>
-				<span class="person__text">
+				<span class='person__text'>
 					{{person.email}}
 				</span>
 			</div>
@@ -47,24 +47,25 @@
 	</div>
 </template>
 <script>
-import Linkedin from '@/images/Linkedin.png';
-import Github from '@/images/github.png';
+import Linkedin from "@/images/Linkedin.png";
+import Github from "@/images/github.png";
 
 export default {
-	data() {
+	props: {
+		person:{type:Object}
+	},
+
+	data () {
 		return {
 			Linkedin: Linkedin,
 			Github:Github
 		}
 	},
-	props: {
-		person:{type:Object}
-	},
 }
 </script>
 <style lang="scss" scoped>
-@import '@/styles/vars/vars.scss';
-@import '@/styles/mixins/mixins.scss';
+@import "@/styles/vars/vars.scss";
+@import "@/styles/mixins/mixins.scss";
 
 .person {
 	min-width: 320px;
@@ -100,7 +101,6 @@ export default {
 
 	&__photo {
 		border-radius: 50%;
-
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
@@ -125,8 +125,8 @@ export default {
 
 	&__icon {
 		display: inline;
-        width: 40px;
-        height: 40px;
+		width: 40px;
+		height: 40px;
 		&--margin-right{
 			margin-right: 12px;
 		}
@@ -150,7 +150,6 @@ export default {
 
 	&__name {
     padding: 0;
-
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;

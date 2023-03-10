@@ -1,40 +1,39 @@
 <template>
-    <div class="homepage grid grid-mobile grid-tablet grid-desktop">
-      <h1 class="homepage__title grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-17">
-        Welcome to Nice Gadgets store!
-      </h1>
-      <div class="homepage__slider grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <TheSlider/>
-      </div>
-
-      <div class="homepage__carusel grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <ProductsCarusel 
-          orderType="year"
-          title="Brand new models"
-        />
-      </div>
-
-      <div class="homepage__categories grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <ProductsCategories
-          :phonesCount="PHONES.length"
-          :tabletCount="0"
-          :accessoriesCount="0"
-        />
-      </div>
-
-      <div class="homepage__carusel grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25">
-        <ProductsCarusel 
-          orderType="price"
-          title="Hot prices"
-        />
-      </div>
+  <div class='homepage grid grid-mobile grid-tablet grid-desktop'>
+    <h1 class='homepage__title grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-17'>
+      Welcome to Nice Gadgets store!
+    </h1>
+    <div class='homepage__slider grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
+      <TheSlider/>
     </div>
+
+    <div class='homepage__carusel grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
+      <ProductsCarusel 
+        orderType='year'
+        title='Brand new models'
+      />
+    </div>
+
+    <div class='homepage__categories grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
+      <ProductsCategories
+        :phonesCount="PHONES.length"
+        :tabletCount="0"
+        :accessoriesCount="0"
+      />
+    </div>
+
+    <div class='homepage__carusel grid-mobile-1-5 grid-tablet-1-13 grid-desktop-1-25'>
+      <ProductsCarusel 
+        orderType='price'
+        title='Hot prices'
+      />
+    </div>
+  </div>
 </template>
 <script>
 import ProductsCategories from "@/components/ProductsCategories/ProductsCategories.vue";
 import ProductsCarusel from "@/components/ProductsCarusel/ProductsCarusel.vue";
 import TheSlider from "@/components/TheSlider/TheSlider.vue";
-
 import { mapGetters,mapActions } from "vuex";
 
 export default {
@@ -43,24 +42,24 @@ export default {
    ProductsCarusel,
    TheSlider
   },
+  
+  computed: {
+    ...mapGetters ({PHONES:"phones/PHONES"})
+  },
+
+  mounted () {
+    this.GET_PHONES_FROM_API ()
+  },
 
   methods: {
-    ...mapActions({GET_PHONES_FROM_API:'phones/GET_PHONES_FROM_API'})
+    ...mapActions ({GET_PHONES_FROM_API:"phones/GET_PHONES_FROM_API"})
   },
-
-  computed: {
-    ...mapGetters({PHONES:'phones/PHONES'})
-  },
-
-  mounted() {
-    this.GET_PHONES_FROM_API()
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/vars/vars.scss";
-@import '@/styles/mixins/_mixins.scss';
+@import "@/styles/mixins/_mixins.scss";
 
 .homepage {
   flex: 1;

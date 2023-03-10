@@ -1,23 +1,23 @@
 <template>
-  <section class="productsSlider">
-    <div class="productsSlider__wrap">
+  <section class='productsSlider'>
+    <div class='productsSlider__wrap'>
       <button
         v-if="isWide"
-        type="button"
-        class="productsSlider__btn"
+        type='button'
+        class='productsSlider__btn'
         @click="prevSlide"
       >
         <img 
           :src="leftArrow" 
-          alt="btn" 
+          alt='btn' 
         />
       </button>
-      <div class="productsSlider__container">
+      <div class='productsSlider__container'>
         <img
           v-for="(slide,index) in sliderData"
           :key="slide.id"
           :src="isWide ? slide.image : slide.imageMobile"
-          alt="slide"
+          alt='slide'
           :class="[
             'productsSlider__img',
             {'productsSlider__img--act': index === currentSlide }
@@ -26,47 +26,47 @@
       </div>
       <button
         v-if="isWide"
-        type="button"
-        class="productsSlider__btn"
+        type='button'
+        class='productsSlider__btn'
         @click="nextSlide"
       >
         <img 
           :src="rightArrow" 
-          alt="btn" 
+          alt='btn' 
         />
       </button>
     </div>
 
-    <div class="productsSlider__indicators">
+    <div class='productsSlider__indicators'>
       <button
-        aria-label="Mute volume"
+        aria-label='Mute volume'
         :class="[
           'productsSlider__indicator',
           {'productsSlider__indicator--active': currentSlide === 0 }
         ]"
-        type="button"
+        type='button'
         @click="currentSlide=0"
       >
       </button>
 
       <button
-        aria-label="Mute volume"
+        aria-label='Mute volume'
         :class="[
           'productsSlider__indicator',
           {'productsSlider__indicator--active': currentSlide === 1 }
         ]"
-        type="button"
+        type='button'
         @click="currentSlide = 1"
       >
       </button>
 
       <button
-        aria-label="Mute volume"
+        aria-label='Mute volume'
         :class="[
           'productsSlider__indicator',
           {'productsSlider__indicator--active': currentSlide === 2}
         ]"
-        type="button"
+        type='button'
         @click="currentSlide = 2"
       >
       </button>
@@ -84,60 +84,60 @@ import banner5 from "@/images/baner4.jpg";
 import banner6 from "@/images/baner6.jpg";
 
 export default {
-  data() {
-      return {
-          sliderData: [
-              {
-                  image: banner1,
-                  imageMobile: banner4,
-                  id: 1,
-              },
-              {
-                  image: banner2,
-                  imageMobile: banner5,
-                  id: 2,
-              },
-              {
-                  image: banner3,
-                  imageMobile: banner6,
-                  id: 3,
-              },
-          ],
-          currentSlide:0,
-          leftArrow: leftArrow,
-          rightArrow: rightArrow,
-          sliderLength: 3,
-          isWide: window.innerWidth > 640,
-          isAutoScroll: true,
-          intervalTime: 5000,
-      }
+  data () {
+    return {
+      sliderData: [
+        {
+          image: banner1,
+          imageMobile: banner4,
+          id: 1,
+        },
+        {
+          image: banner2,
+          imageMobile: banner5,
+          id: 2,
+        },
+        {
+          image: banner3,
+          imageMobile: banner6,
+          id: 3,
+        },
+      ],
+      currentSlide:0,
+      leftArrow: leftArrow,
+      rightArrow: rightArrow,
+      sliderLength: 3,
+      isWide: window.innerWidth > 640,
+      isAutoScroll: true,
+      intervalTime: 5000,
+    }
   },
     
-  created() {
-      addEventListener('resize', () => {
-          this.isWide = innerWidth > 640
-      })
+  created () {
+    addEventListener ("resize",  () => {
+      this.isWide = innerWidth > 640
+    })
+  },
+
+  mounted () {
+    this.auto ()
   },
 
   methods: {
-      prevSlide() {
-          this.currentSlide === 0
-              ? this.currentSlide = this.sliderLength-1
-              :this.currentSlide--
-      },
-      nextSlide() {
-          this.currentSlide === this.sliderLength - 1
-              ? this.currentSlide = 0
-              :this.currentSlide++
-      },
-      auto() {
-          if(this.isAutoScroll)
-          setInterval(this.nextSlide, this.intervalTime)
-      }
-  },
-
-  mounted() {
-      this.auto()
+    prevSlide () {
+      this.currentSlide === 0
+        ? this.currentSlide = this.sliderLength-1
+        :this.currentSlide--
+    },
+    nextSlide () {
+      this.currentSlide === this.sliderLength - 1
+        ? this.currentSlide = 0
+        :this.currentSlide++
+    },
+    auto () {
+      if (this.isAutoScroll)
+      setInterval (this.nextSlide, this.intervalTime)
+    }
   },
 }
 </script>
@@ -173,7 +173,6 @@ export default {
     &:hover {
       border-color: $icons;
       background-color: $icons;
-
       cursor: pointer;
     }
   }

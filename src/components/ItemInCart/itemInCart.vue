@@ -1,17 +1,17 @@
 <template>
-  <div class="cart__product-cart product-cart">
+  <div class='cart__product-cart product-cart'>
     <div 
       class='product-cart__delete' 
-      @click="handlerDeleteFromCart(good)">
+      @click="handlerDeleteFromCart (good)">
     </div>
     <router-link
       :to="{ name: 'phonePage', params: { id:good.itemId } }"
       class='product-cart__image-box'
     >
       <img
-        :src="require('@/images/' + good.image)"
+        :src="require ('@/images/' + good.image)"
         class='product-cart__image'
-        alt="Phone"
+        alt='Phone'
       />
     </router-link>
 
@@ -24,14 +24,14 @@
 
     <div class='product__counter counter'>
       <div 
-          :class="[
-            'counter__minus',
-            {'counter__minus--disable': good.count === 1}
-          ]" 
-          @click="removeCount"
+        :class="[
+          'counter__minus',
+          {'counter__minus--disable': good.count === 1}
+        ]" 
+        @click="removeCount"
       >
       </div>
-      <div class="counter__value"> 
+      <div class='counter__value'> 
         {{ good.count }}
       </div>
       <div :class="[ 
@@ -40,7 +40,7 @@
       ]" 
         @click="addCount">
       </div>
-      <div class="product-cart__price">
+      <div class='product-cart__price'>
         {{good.price * good.count}}$
       </div>
     </div>
@@ -52,29 +52,29 @@ export default {
   props: {
     good: {
       type: Object,
-      default() {
-          return {}
+      default () {
+        return {}
       }
     }
   },
 
   methods: {
-    handlerDeleteFromCart(phone) {
-      this.$emit('deleteFromCart',phone)
+    handlerDeleteFromCart (phone) {
+      this.$emit ("deleteFromCart",phone)
     },
-    removeCount() {
-      this.$emit('removeCount')
+    removeCount () {
+      this.$emit ("removeCount")
     },
-    addCount() {
-      this.$emit('addCount')
+    addCount () {
+      this.$emit ("addCount")
     }
   },
 }
 </script>
 <style lang="scss" scoped>
 
-@import '@/styles/mixins/mixins';
-@import '@/styles/vars/vars.scss';
+@import "@/styles/mixins/mixins";
+@import "@/styles/vars/vars.scss";
 .container {
   display: flex;
   flex: 1;
@@ -86,7 +86,6 @@ export default {
 
 .cart {
   padding: 0 16px;
-
   &__container {
     justify-self: center;
 
@@ -95,7 +94,6 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
       padding: 0;
     }
 
@@ -130,9 +128,7 @@ export default {
     }
 
     letter-spacing: -0.01em;
-
     margin: 0 0 32px;
-
     color: $white;
   }
 
@@ -146,39 +142,28 @@ export default {
 
 .product-cart{
   color: $white;
-
   display: flex;
   flex-direction: row;
-
   gap: 24px;
-
   justify-content: flex-start;
   align-items: center;
 
   @include mobile {
     justify-content: space-between;
-
     padding: 16px;
-
     gap: 24px 0;
-
     flex-wrap: wrap;
   }
   
   padding: 24px;
-
-  
   background-color: $surface-1;
-
   margin-bottom: 16px;
 
   &__delete {
     cursor: pointer;
-
     background-image: url(@/images/Cross.svg);
     background-repeat: no-repeat;
     background-position: center;
-
     width: 16px;
     height: 16px;
 
@@ -202,7 +187,6 @@ export default {
   &__image-box {
     width: 80px;
     height: 80px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,11 +214,9 @@ export default {
 
   &__price {
     width: 80px;
-
     font-weight: 800;
     font-size: 22px;
     line-height: 140%;
-
     text-align: right;
   }
 }
@@ -244,20 +226,14 @@ export default {
   gap: 0px;
   &__minus {
     cursor: pointer;
-
     background-color: transparent;
-
     background-image: url(@/images/Minus.svg);
     background-repeat: no-repeat;
     background-position: center;
-
     background-color: transparent;
-
     border: 1px solid $surface-2;
-
     width: 32px;
     height: 32px;
-
     transition: opacity .3s, background-color .3s;
 
     &:hover {
@@ -266,9 +242,7 @@ export default {
 
     &--disable {
       cursor: default;
-
       opacity: 50%;
-
       &:hover {
         background-color: transparent;
       }
@@ -279,33 +253,25 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 32px;
     height: 32px;
-
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-
     text-align: center;
     color: $white;
   }
 
   &__plus {
     cursor: pointer;
-
     background-color: transparent;
-
     transform: rotate(90deg);
     background-image: url(@/images/Cross.svg);
     background-repeat: no-repeat;
     background-position: center;
-
     border: 1px solid $elements;
-
     width: 32px;
     height: 32px;
-
     transition: opacity .3s, background-color .3s;
 
     &:hover {
@@ -314,9 +280,7 @@ export default {
 
     &--disable {
       cursor: default;
-
       background-color: transparent;
-
       opacity: 50%;
 
       &:hover {
@@ -329,17 +293,12 @@ export default {
 .bill {
   width: 100%;
   height: min-content;
-
   padding: 24px;
-
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
   color: $white;
-  
   border: 1px solid $elements;  
   
   @include mobile {
@@ -357,7 +316,6 @@ export default {
   &--operation {
     position: relative;
     border: 1px solid;
-
     animation: bill-success 1s linear 0s infinite;
   }
 
@@ -365,7 +323,6 @@ export default {
     font-weight: 800;
     font-size: 32px;
     line-height: 41px;
-
     text-align: center;
   }
 
@@ -373,40 +330,32 @@ export default {
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-
     color: $secondary;
-
     margin-bottom: 24px;
   }
 
   &__line {
     width: 100%;
     border-bottom: 1px solid $elements;
-
     margin-bottom: 24px;
   }
 
   &__buttons-box {
     width: 100%;
     display: flex;
-
     gap: 16px;
   }
 
   &__clear-button {
     cursor: pointer;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 0 10px;
     height: 40px;
-
     background-color: $surface-1;
     font-size: 14px;
     border: 1px solid $elements;
-
     transition: background-color .3s;
 
     &:hover {

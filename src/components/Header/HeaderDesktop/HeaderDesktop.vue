@@ -1,24 +1,24 @@
 <template>
-	<div class="navigation">
-		<div class="navigation__box">
-			<div class="navigation__wrapper">
-				<div class="navigation__left">
+	<div class='navigation'>
+		<div class='navigation__box'>
+			<div class='navigation__wrapper'>
+				<div class='navigation__left'>
 					<router-link
-						to="/"
-						class="navigation__logo-link"
+						to='/'
+						class='navigation__logo-link'
 					>
 						<img 
 							:src="Logo" 
-							alt="Nice gadgets" 
-							class="navigation__logo-img" 
+							alt='Nice gadgets' 
+							class='navigation__logo-img' 
 						/>
 					</router-link>
 
-					<nav class="navigation__pages">
-						<ul class="navigation__list">
+					<nav class='navigation__pages'>
+						<ul class='navigation__list'>
 							<li
-								v-for="(route,i) in routes"
-								class="navigation__item"
+								v-for=" (route,i) in routes"
+								class='navigation__item'
 								:key="route"
 							>
 								<router-link
@@ -32,26 +32,26 @@
 					</nav>
 				</div>
 
-				<div class="navigation__right">
+				<div class='navigation__right'>
 					<router-link
-						to="/favourites"
-						class="navigation__favourites"
+						to='/favourites'
+						class='navigation__favourites'
 					>
 						<div 
 							v-if="ItemsInfavourites>0" 
-							class="navigation__link-img-count"
+							class='navigation__link-img-count'
 						>
 							{{ItemsInfavourites}}
 						</div>
 					</router-link>
 
 					<router-link
-						to="/cart"
-						class="navigation__cart"
+						to='/cart'
+						class='navigation__cart'
 					>
 						<div 
 							v-if="ItemsInCart>0" 
-							class="navigation__link-img-count"
+							class='navigation__link-img-count'
 						>
 							{{ItemsInCart}}
 						</div>
@@ -63,18 +63,18 @@
 </template>
 <script>
 import Logo from "@/images/Logo.png";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-	data(){
+	data (){
 		return {
 			Logo: Logo,
-			routes:[ 'phones', 'tablets', 'accessories']
+			routes:[ "phones", "tablets", "accessories"]
 		}
 	},
 
 	computed: {
-      ...mapGetters({ItemsInCart:'cart/ItemsInCart',ItemsInfavourites:'favourites/ItemsInfavourites'}),
+    ...mapGetters ({ItemsInCart:"cart/ItemsInCart",ItemsInfavourites:"favourites/ItemsInfavourites"}),
 	}
 }
 </script>
@@ -179,7 +179,6 @@ export default {
 			left: 0;
 			bottom: 0;
 			opacity: 0;
-
 			transition: opacity 0.3s;
 		}
 
@@ -246,7 +245,7 @@ export default {
 			content: "";
 			height: 16px;
 			width: 16px;
-			background-image: url('@/images/Cart.svg');
+			background-image: url("@/images/Cart.svg");
 			background-position: center;
 			background-repeat: no-repeat;
 			top: 50%;

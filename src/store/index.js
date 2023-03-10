@@ -3,11 +3,11 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import { phones } from '@/store/phones.js';
-import { cart } from '@/store/cart.js';
-import { favourites } from '@/store/favourites.js';
+import { cart } from "./cart1";
+import { phones } from "./phones1";
+import { favourites } from "./favourites1";
 
-let store = new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     phones: phones,
     cart: cart,
