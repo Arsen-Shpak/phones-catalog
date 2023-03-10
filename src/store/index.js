@@ -3,9 +3,9 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import { cart } from "./cart1";
-import { phones } from "./phones1";
-import { favourites } from "./favourites1";
+import { cart } from "./cart";
+import { phones } from "./phones";
+import { favourites } from "./favourites";
 
 const store = new Vuex.Store({
   modules: {
